@@ -1,0 +1,32 @@
+NAME = cub3D
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -I./inc -Imlx_linux -O3
+
+SRC_DIR = src/
+OBJ_DIR = obj/
+
+SRCS = $(SRC_DIR)main.c \
+
+OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+all: $(NAME)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJS)
+	$(MAKE) -C mlx_linux
+	$(MAKE) -C libft
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L./mlx_linux/ -L./libft/ -lmlx -lXext -lX11 -lm -lft
+
+clean:
+	$(MAKE) -C mlx_linux clean
+	$(MAKE) -C libft clean
+	rm -rf $(OBJ_DIR) 
+
+fclean: clean
+	$(MAKE) -C libft fclean
+	rm -rf $(NAME)
+
+re: fclean all
