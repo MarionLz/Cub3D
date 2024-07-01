@@ -1,11 +1,8 @@
-#include "../mlx_linux/mlx.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "../include/cub3D.h"
 
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
+	t_data	data;
 
 	int	map[10][10] =
 	{
@@ -15,19 +12,17 @@ int	main(void)
 		{1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
 		{1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
 		{1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
-		{1, 1, 0, 1, 0, 0, 0, 0, 0, 1},
+		{1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
 		{1, 0, 1, 1, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	};
 
-	printf("map = %d\n", map[0][0]);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 10*64, 10*64, "WELCOME TO MOLKY MUSEUM, a unique exhibition of a magnificient cat portraits !");
-	if (!win)
-	{
-		free(mlx);
-		return (1);
-	}
-	mlx_loop(mlx);
+	init_data(&data);
+	create_images(&data);
+	print_map(&data, map);
+	mlx_hook(data.win, 02, 1L<<0, &key_hook, &data); //key_release : move the player
+	mlx_hook(data.win, 03, 1L<<1, &key_hook, &data); //key_press : close the window with ESC
+	mlx_hook(data.win, 17, 0, &close_win, &data); // close the window with the red cross
+	mlx_loop(data.mlx);
 }
