@@ -3,9 +3,9 @@
 void	create_images(t_data *data)
 {
 	//compass
-	data->img_compass.img = mlx_new_image(data->mlx, WIDTH/10, HEIGHT/10);
+	data->img_compass.img = mlx_new_image(data->mlx, data->width_square, data->height_square);
 	data->img_compass.addr = mlx_get_data_addr(data->img_compass.img, &data->img_compass.bits_per_pixel, &data->img_compass.line_length, &data->img_compass.endian);
-	draw_compass(data->img_compass, WIDTH/10, 0x00FF0000);
+	draw_compass(data->img_compass, data->width_square, 0x00FF0000);
 
 	//player
 	data->img_player.img = mlx_new_image(data->mlx, 10, 10);
@@ -18,14 +18,14 @@ void	create_images(t_data *data)
 	put_pixel(data->img_background, 10, 0xA9A9A9);
 
 	//wall
-	data->img_wall.img = mlx_new_image(data->mlx, WIDTH/10, HEIGHT/10);
+	data->img_wall.img = mlx_new_image(data->mlx, data->width_square, data->height_square);
 	data->img_wall.addr = mlx_get_data_addr(data->img_wall.img, &data->img_wall.bits_per_pixel, &data->img_wall.line_length, &data->img_wall.endian);
-	put_pixel(data->img_wall, WIDTH/10, 0xFFFFFF);
+	put_pixel(data->img_wall, data->width_square, 0xFFFFFF);
 
 	//floor
-	data->img_floor.img = mlx_new_image(data->mlx, WIDTH/10, HEIGHT/10);
+	data->img_floor.img = mlx_new_image(data->mlx, data->width_square, data->height_square);
 	data->img_floor.addr = mlx_get_data_addr(data->img_floor.img, &data->img_floor.bits_per_pixel, &data->img_floor.line_length, &data->img_floor.endian);
-	put_pixel(data->img_floor, WIDTH/10, 0xA9A9A9);
+	put_pixel(data->img_floor, data->width_square, 0xA9A9A9);
 
 	//dot_ray
 	data->img_dot.img = mlx_new_image(data->mlx, 5, 5);
@@ -33,7 +33,7 @@ void	create_images(t_data *data)
 	put_pixel(data->img_dot, 5, 0x00FF0000);
 }
 
-void	print_map(t_data *data, int map[10][10])
+void	print_map(t_data *data)
 {
 	int	x;
 	int	y;
@@ -44,14 +44,14 @@ void	print_map(t_data *data, int map[10][10])
 		x = 0;
 		while (x < 10)
 		{
-			if (map[y][x] == 1)
-				mlx_put_image_to_window(data->mlx, data->win, data->img_wall.img, x * WIDTH/10, y * HEIGHT/10);
-			if (map[y][x] == 0)
-				mlx_put_image_to_window(data->mlx, data->win, data->img_floor.img, x * WIDTH/10, y * HEIGHT/10);
+			if (data->map[y][x] == 1)
+				mlx_put_image_to_window(data->mlx, data->win, data->img_wall.img, x * data->width_square, y * data->height_square);
+			if (data->map[y][x] == 0)
+				mlx_put_image_to_window(data->mlx, data->win, data->img_floor.img, x * data->width_square, y * data->height_square);
 			x++;
 		}
 		y++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->img_player.img, data->x_player, data->y_player);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_player.img, data->player.p_x, data->player.p_y);
 }

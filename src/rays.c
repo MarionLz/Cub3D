@@ -2,23 +2,39 @@
 
 void init_ray(t_data *data)
 {
-	data->ray.r_angle = data->angle_player;
-	printf("ray angle = %f\n", data->ray.r_angle);
-	// look_up;
-	if (fabs(data->ray.r_angle) < 3.14)
+	int		map_x;
+	int		map_y;
+	bool	hit_wall;
+
+	data->ray.r_angle = data->player.p_angle;
+	if (fabs(data->ray.r_angle) < PI)
 	{
-		data->ray.r_y = (int)(data->y_player / (WIDTH / 10)) * (WIDTH / 10) + -0.0001;
-		data->ray.r_x = data->x_player - (data->y_player - data->ray.r_y) * 1 / (tan(data->ray.r_angle));
+		data->ray.r_y = (int)(data->player.p_y / data->height_square) * data->height_square + data->height_square;
+		data->ray.r_x = (data->ray.r_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
 	}
-	if (fabs(data->ray.r_angle) > 3.14)
+	else if (fabs(data->ray.r_angle) > PI)
 	{
-		data->ray.r_y = (int)(data->y_player / (WIDTH / 10)) * (WIDTH / 10) + (WIDTH / 10);
-		data->ray.r_x = data->x_player - (data->y_player - data->ray.r_y) * 1 / (tan(data->ray.r_angle));
+		data->ray.r_y = (int)(data->player.p_y / data->height_square) * data->height_square;
+		data->ray.r_x = (data->ray.r_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
 	}
-	if (data->angle_player == 0)
+	if (data->ray.r_angle == 0 || data->ray.r_angle == PI)
 	{
-		data->ray.r_y = data->y_player;
-		data->ray.r_x = data->x_player;
+		data->ray.r_y = data->player.p_y;
+		data->ray.r_x = data->player.p_x;
+	}
+	hit_wall = false;
+	if (hit_wall == false)
+	{
+		map_x = data->ray.r_x / data->width_square;
+		if (fabs(data->ray.r_angle) > PI)
+			map_y = data->ray.r_y / data->height_square - 1;
+		else
+			map_y = data->ray.r_y / data->height_square;
+		if (data->map[map_y][map_x] == 1)
+		{
+			hit_wall = true;
+			printf("WALL\n");
+		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img_dot.img, (int)data->ray.r_x, (int)data->ray.r_y);
 }
