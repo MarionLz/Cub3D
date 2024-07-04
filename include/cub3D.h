@@ -11,10 +11,10 @@
 
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
-# define FORWARD		122		//119(qwerty)
+# define FORWARD		119		//122(qwerty)
 # define BACK			115
 # define RIGHt			100
-# define LEFT			113		//97(qwerty)
+# define LEFT			97		//113(qwerty)
 
 //struc for my_mlx_pixel_put
 typedef struct  s_img
@@ -29,10 +29,11 @@ typedef struct  s_img
 typedef struct s_ray
 {
 	double	r_distance;
-
 	double	r_x;
 	double	r_y;
 	double	r_angle;
+	double	r_xinter;
+	double	r_yinter;
 }	t_ray;
 
 typedef struct s_player

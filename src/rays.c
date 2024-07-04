@@ -7,15 +7,17 @@ void init_ray(t_data *data)
 	bool	hit_wall;
 
 	data->ray.r_angle = data->player.p_angle;
-	if (fabs(data->ray.r_angle) < PI)
+	if (data->ray.r_angle < PI)
 	{
 		data->ray.r_y = (int)(data->player.p_y / data->height_square) * data->height_square + data->height_square;
 		data->ray.r_x = (data->ray.r_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
+		data->ray.r_yinter += data->height_square;
 	}
-	else if (fabs(data->ray.r_angle) > PI)
+	else if (data->ray.r_angle > PI)
 	{
 		data->ray.r_y = (int)(data->player.p_y / data->height_square) * data->height_square;
 		data->ray.r_x = (data->ray.r_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
+		data->ray.r_yinter -= data->height_square;
 	}
 	if (data->ray.r_angle == 0 || data->ray.r_angle == PI)
 	{
@@ -26,7 +28,7 @@ void init_ray(t_data *data)
 	if (hit_wall == false)
 	{
 		map_x = data->ray.r_x / data->width_square;
-		if (fabs(data->ray.r_angle) > PI)
+		if (data->ray.r_angle > PI)
 			map_y = data->ray.r_y / data->height_square - 1;
 		else
 			map_y = data->ray.r_y / data->height_square;
