@@ -13,3 +13,7 @@ https://github.com/Saxsori/ray-cast?tab=readme-ov-file
 https://lodev.org/cgtutor/raycasting.html
 https://www.youtube.com/watch?v=H0ITQETdoVw&t=573s&ab_channel=BlogCr%C3%A9ationdeJeuxVid%C3%A9o
 https://medium.com/@afatir.ahmedfatir/cub3d-tutorial-af5dd31d2fcf#:~:text=some%20walls%20now.-,Part%203%3A%20Rendering%3A,-so%20now%20we
+
+Malaise Museum : 
+https://www.watson.ch/fr/divertissement/animaux/135083025-taxidermie-20-fails-d-animaux-empailles.
+
