@@ -19,5 +19,6 @@ void	init_data(t_data *data)
 	data->player.p_y = 100;
 	data->player.p_speed = 10;
 	data->player.p_angle = 0;
+	data->player.fov_rad = (FOV * PI / 180);
 	data->delta_angle = 0.1;
 }
