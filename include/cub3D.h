@@ -8,13 +8,16 @@
 #include <stdbool.h>
 
 #define PI 3.14159
+#define FOV	60
 
+//# define S_WIDTH 1900 // screen Width
+//# define S_HEIGHT 1000 // screen Heigth
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 # define FORWARD		119		//122(qwerty)
 # define BACK			115
-# define RIGHt			100
-# define LEFT			97		//113(qwerty)
+# define RIGHT			100
+# define LEFT			113		//97(qwerty)
 
 //struc for my_mlx_pixel_put
 typedef struct  s_img
@@ -40,6 +43,7 @@ typedef struct s_player
 {
 	int 	p_x;
 	int		p_y;
+	float	fov_rad;
 	int		p_speed;
 	double	p_angle;
 }	t_player;
@@ -83,5 +87,8 @@ void	print_map(t_data *data);
 void 	init_ray(t_data *data);
 
 int    close_win(void);
+
+/* DRAW WALL */
+void	display_wall(t_data *data);
 
 # endif
