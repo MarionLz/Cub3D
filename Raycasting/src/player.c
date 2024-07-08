@@ -34,14 +34,15 @@ void	rotate_player(t_data *data, int direction)
 		if (data->player.p_angle < 0)
 			data->player.p_angle += (2 * PI);
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img_background.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_background.img, 2000, 0);
 	update_compass(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 0, 0);
-	init_ray(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 2000, 0);
+	//init_ray(data);
 }
 
 void    move_player(t_data *data, int dir)
 {
+	printf("OK\n");
 	mlx_put_image_to_window(data->mlx, data->win, data->img_background.img, data->player.p_x, data->player.p_y);
 	data->player.p_x += floorf(data->player.p_speed * cos(data->player.p_angle))* dir;
     data->player.p_y += floorf(data->player.p_speed * sin(data->player.p_angle))* dir;

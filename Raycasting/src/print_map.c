@@ -45,13 +45,13 @@ void	print_map(t_data *data)
 		while (x < 10)
 		{
 			if (data->map[y][x] == 1)
-				mlx_put_image_to_window(data->mlx, data->win, data->img_wall.img, x * data->width_square, y * data->height_square);
+				mlx_put_image_to_window(data->mlx, data->win, data->img_wall.img, x * data->width_square + 2000, y * data->height_square);
 			if (data->map[y][x] == 0)
-				mlx_put_image_to_window(data->mlx, data->win, data->img_floor.img, x * data->width_square, y * data->height_square);
+				mlx_put_image_to_window(data->mlx, data->win, data->img_floor.img, x * data->width_square + 2000, y * data->height_square);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 2000, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->img_player.img, data->player.p_x, data->player.p_y);
 }

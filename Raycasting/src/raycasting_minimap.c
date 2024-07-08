@@ -1,6 +1,6 @@
 #include "../include/cub3D.h"
 
-void	init_ray(t_data *data)
+void	init_ray_minimap(t_data *data)
 {
 	double	h_distance;
 	double	v_distance;
@@ -22,7 +22,7 @@ void	init_ray(t_data *data)
 	}
 }
 
-int		hit_wall(t_data *data, double x, double y, char flag)
+int		hit_wall_minimap(t_data *data, double x, double y, char flag)
 {
 	int	map_x;
 	int	map_y;
@@ -40,7 +40,7 @@ int		hit_wall(t_data *data, double x, double y, char flag)
 	return (1);
 }
 
-double	get_horizontal_distance(t_data *data)
+double	get_horizontal_distance_minimap(t_data *data)
 {
 	double h_x = 0;
 	double h_y = 0;
@@ -74,7 +74,7 @@ double	get_horizontal_distance(t_data *data)
 	return (sqrt(pow(h_x - data->player.p_x, 2) + pow(h_y - data->player.p_y, 2)));
 }
 
-double	get_vertical_distance(t_data *data)
+double	get_vertical_distance_minimap(t_data *data)
 {
 	double v_x = 0;
 	double v_y = 0;

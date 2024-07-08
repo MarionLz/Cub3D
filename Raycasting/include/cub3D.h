@@ -12,18 +12,20 @@
 #define P2 PI/2
 #define P3 3*PI/2
 
-//# define S_WIDTH 1900 // screen Width
-//# define S_HEIGHT 1000 // screen Heigth
+# define SCR_WIDTH 3000 // screen Width
+# define SCR_HEIGHT 1000 // screen Heigth
+# define MAP_WIDTH 1000
+# define GAME_WIDTH 2000
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 # define BACK			115
 # define RIGHt			100
 //azerty :
-# define FORWARD		122
-# define LEFT			113
+//# define FORWARD		122
+//# define LEFT			113
 //qwerty :
-//# define FORWARD		119
-//# define LEFT			97
+# define FORWARD		119
+# define LEFT			97
 
 //struc for my_mlx_pixel_put
 typedef struct  s_img
@@ -62,8 +64,8 @@ typedef struct  s_data
 {
 	void		*mlx;
 	void		*win;
-	int			width;
-	int			height;
+	//int			width;
+	//int			height;
 	int			nb_colomn;
 	int			nb_rows;
 	int			width_square;

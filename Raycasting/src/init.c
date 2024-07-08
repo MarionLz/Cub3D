@@ -2,10 +2,8 @@
 
 void	init_data(t_data *data)
 {
-	data->width = 1900;
-	data->height = 1000;
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->width, data->height, "WELCOME TO CUB3D");
+	data->win = mlx_new_window(data->mlx, SCR_WIDTH, SCR_HEIGHT, "WELCOME TO CUB3D");
 	if (!data->win)
 	{
 		free(data->mlx);
@@ -13,9 +11,9 @@ void	init_data(t_data *data)
 	}
 	data->nb_colomn = 10;
 	data->nb_rows = 10;
-	data->width_square = data->width / data->nb_colomn;
-	data->height_square = data->height / data->nb_rows;
-	data->player.p_x = 390;
+	data->width_square = MAP_WIDTH / data->nb_colomn;
+	data->height_square = SCR_HEIGHT / data->nb_rows;
+	data->player.p_x = 2390;
 	data->player.p_y = 510;
 	data->player.p_speed = 10;
 	data->player.p_angle = 0;
