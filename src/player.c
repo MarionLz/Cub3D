@@ -1,43 +1,23 @@
 #include "../include/cub3D.h"
 
-int	key_hook(int keycode, t_data *data)
-{
-	//rotate left
-    if (keycode == ROTATE_LEFT)
-        rotate_player(data, 1);
-    //rotate right
-	if (keycode == ROTATE_RIGHT)
-        rotate_player(data, -1);
-    //forward
-	if (keycode == FORWARD)
-        move_player(data, 1);
-	//back
-    if (keycode == BACK)
-        move_player(data, -1);
-	// esc
-    if (keycode == 65307)
-        close_win();
-    return (0);
-}
-
 void	update_compass(t_data *data)
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 
 	put_pixel(data->img_compass, data->width_square, 0x000000);
 	x = (data->width_square / 2) * -1;
 	while (x < data->width_square / 2)
+	{
+		y = (data->height_square / 2) * -1;
+		while (y < data->height_square / 2)
 		{
-			y = (data->height_square / 2) * -1;
-			while (y < data->height_square / 2)
-			{
-				if (y == floorf(tan(data->player.p_angle) * x))
-					my_mlx_pixel_put(&data->img_compass, (x + data->width_square / 2), (y + data->height_square / 2), 0x00FF0000);
-				y += 1;
-			}
-			x += 1;
+			if (y == floorf(tan(data->player.p_angle) * x))
+				my_mlx_pixel_put(&data->img_compass, (x + data->width_square / 2), (y + data->height_square / 2), 0x00FF0000);
+			y += 1;
 		}
+		x += 1;
+	}
 }
 
 void	rotate_player(t_data *data, int direction)

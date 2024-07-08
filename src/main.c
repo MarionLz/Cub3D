@@ -19,8 +19,8 @@ int	main(void)
 	init_data(&data);
 	create_images(&data);
 	print_map(&data);
-	mlx_hook(data.win, 02, 1L<<0, &key_hook, &data); //key_release : move the player
-	mlx_hook(data.win, 03, 1L<<1, &key_hook, &data); //key_press : close the window with ESC
+	mlx_hook(data.win, 02, 1L<<0, &key_press, &data); //key_press : move the player
+	mlx_hook(data.win, 03, 1L<<1, &key_release, 0); //key_release : close the window with ESC
 	mlx_hook(data.win, 17, 0, &close_win, &data); // close the window with the red cross
 	mlx_loop(data.mlx);
 }
