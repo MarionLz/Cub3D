@@ -12,20 +12,20 @@
 #define P2 PI/2
 #define P3 3*PI/2
 
-# define SCR_WIDTH 3000 // screen Width
-# define SCR_HEIGHT 1000 // screen Heigth
-# define MAP_WIDTH 1000
-# define GAME_WIDTH 2000
+# define SCR_WIDTH 1800 // screen Width
+# define SCR_HEIGHT 600 // screen Heigth
+# define MAP_WIDTH 600
+# define GAME_WIDTH 1200
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 # define BACK			115
-# define RIGHt			100
+# define RIGHT			100
 //azerty :
-//# define FORWARD		122
-//# define LEFT			113
+# define FORWARD		122
+# define LEFT			113
 //qwerty :
-# define FORWARD		119
-# define LEFT			97
+//# define FORWARD		119
+//# define LEFT			97
 
 //struc for my_mlx_pixel_put
 typedef struct  s_img
@@ -84,16 +84,19 @@ typedef struct  s_data
 
 void	init_data(t_data *data);
 
-//player
+/* MOVES */
 void	rotate_player(t_data *data, int dir);
-void    move_player(t_data *data, int dir);
+void    move_forward_back(t_data *data, int dir);
+void	move_left_right(t_data *data, int dir);
 
 void	draw_compass(t_img img, int width, int height, int color);
+void	draw_background_player(t_img img, int width, int height, int color);
 void	put_pixel(t_img img, int width, int height, int color);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+/* DISPLAY MINIMAP */
 void	create_images(t_data *data);
-void	print_map(t_data *data);
+void	display_minimap(t_data *data);
 
 void	init_ray(t_data *data);
 int		hit_wall(t_data *data, double x, double y, char flag);

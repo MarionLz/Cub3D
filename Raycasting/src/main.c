@@ -18,7 +18,7 @@ int	main(void)
 	};
 	init_data(&data);
 	create_images(&data);
-	print_map(&data);
+	display_minimap(&data);
 	//init_ray(&data);
 	mlx_hook(data.win, 02, 1L<<0, &key_press, &data); //key_press : move the player
 	mlx_hook(data.win, 03, 1L<<1, &key_release, 0); //key_release : close the window with ESC

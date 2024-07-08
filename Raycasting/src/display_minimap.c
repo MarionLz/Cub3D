@@ -15,7 +15,7 @@ void	create_images(t_data *data)
 	//background player
 	data->img_background.img = mlx_new_image(data->mlx, 10, 10);
 	data->img_background.addr = mlx_get_data_addr(data->img_background.img, &data->img_background.bits_per_pixel, &data->img_background.line_length, &data->img_background.endian);
-	put_pixel(data->img_background, 10, 10, 0xA9A9A9);
+	draw_background_player(data->img_background, 10, 10, 0xA9A9A9);
 
 	//wall
 	data->img_wall.img = mlx_new_image(data->mlx, data->width_square, data->height_square);
@@ -33,7 +33,7 @@ void	create_images(t_data *data)
 	put_pixel(data->img_dot, 5, 5, 0x00FF0000);
 }
 
-void	print_map(t_data *data)
+void	display_minimap(t_data *data)
 {
 	int	x;
 	int	y;
@@ -45,13 +45,13 @@ void	print_map(t_data *data)
 		while (x < 10)
 		{
 			if (data->map[y][x] == 1)
-				mlx_put_image_to_window(data->mlx, data->win, data->img_wall.img, x * data->width_square + 2000, y * data->height_square);
+				mlx_put_image_to_window(data->mlx, data->win, data->img_wall.img, x * data->width_square + GAME_WIDTH, y * data->height_square);
 			if (data->map[y][x] == 0)
-				mlx_put_image_to_window(data->mlx, data->win, data->img_floor.img, x * data->width_square + 2000, y * data->height_square);
+				mlx_put_image_to_window(data->mlx, data->win, data->img_floor.img, x * data->width_square + GAME_WIDTH, y * data->height_square);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 2000, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, GAME_WIDTH, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->img_player.img, data->player.p_x, data->player.p_y);
 }
