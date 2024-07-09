@@ -15,14 +15,10 @@ void	init_ray(t_data *data)
 		if (h_distance <= v_distance || data->ray.vert_dir == 1)
 		{
 			data->ray.r_distance = h_distance;
-			printf("hx = %f\n", data->ray.horiz_x);
-			printf("hy = %f\n", data->ray.horiz_y);
 			mlx_put_image_to_window(data->mlx, data->win, data->img_dot.img, (int)data->ray.horiz_x, (int)data->ray.horiz_y);
 		}
 		else if (v_distance < h_distance || data->ray.horiz_dir == 1)
 		{
-			printf("vx = %f\n", data->ray.vert_x);
-			printf("vy = %f\n", data->ray.vert_y);
 			data->ray.r_distance = v_distance;
 			mlx_put_image_to_window(data->mlx, data->win, data->img_dot.img, (int)data->ray.vert_x, (int)data->ray.vert_y);
 		}

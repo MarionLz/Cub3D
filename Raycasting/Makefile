@@ -5,8 +5,8 @@ CFLAGS = -Wall -Wextra -Werror -I./inc -Imlx_linux -O3
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-SRCS =	$(SRC_DIR)main.c $(SRC_DIR)init.c $(SRC_DIR)draw_pixels.c $(SRC_DIR)display_minimap.c $(SRC_DIR)moves.c $(SRC_DIR)error_exit.c \
-		$(SRC_DIR)rays.c $(SRC_DIR)key.c $(SRC_DIR)draw_wall.c \
+SRCS =	$(SRC_DIR)main.c $(SRC_DIR)init.c $(SRC_DIR)draw_pixels.c $(SRC_DIR)print_map.c $(SRC_DIR)moves.c $(SRC_DIR)error_exit.c \
+		$(SRC_DIR)rays.c $(SRC_DIR)key.c $(SRC_DIR)draw_wall.c\
 
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 clean:
 	$(MAKE) -C mlx_linux clean
 	$(MAKE) -C libft clean
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR) 
 
 fclean: clean
 	$(MAKE) -C libft fclean

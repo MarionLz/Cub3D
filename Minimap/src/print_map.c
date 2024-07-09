@@ -55,3 +55,8 @@ void	print_map(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->img_player.img, data->player.p_x, data->player.p_y);
 }
+
+void	print_minimap()
+{
+	
+}

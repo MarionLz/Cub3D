@@ -14,24 +14,6 @@ void	draw_compass(t_img img, int width, int height, int color)
 	}
 }
 
-void	draw_background_player(t_img img, int width, int height, int color)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < width)
-	{
-		y = 0;
-		while (y < height)
-		{
-			my_mlx_pixel_put(&img, x, y, color);
-			y++;
-		}
-		x++;
-	}
-}
-
 void	put_pixel(t_img img, int width, int height, int color)
 {
 	int	x;

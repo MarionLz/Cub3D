@@ -2,8 +2,8 @@
 
 void	init_data(t_data *data)
 {
-	data->width = 1900;
-	data->height = 1000;
+	data->width = 600;
+	data->height = 600;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->width, data->height, "WELCOME TO CUB3D");
 	if (!data->win)

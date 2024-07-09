@@ -12,10 +12,8 @@
 #define P2 PI/2
 #define P3 3*PI/2
 
-# define SCR_WIDTH 1800 // screen Width
-# define SCR_HEIGHT 600 // screen Heigth
-# define MAP_WIDTH 600
-# define GAME_WIDTH 1200
+# define SCR_WIDTH 1900 // screen Width
+# define SCR_HEIGHT 1000 // screen Heigth
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 # define BACK			115
@@ -77,6 +75,7 @@ typedef struct  s_data
 	t_img		img_compass;
 	t_img		img_background;
 	t_img		img_dot;
+	t_img		img_screen;
 	t_player	player;
 	double		delta_angle;
 	t_ray		ray;
@@ -85,18 +84,16 @@ typedef struct  s_data
 void	init_data(t_data *data);
 
 /* MOVES */
-void	rotate_player(t_data *data, int dir);
+void	rotate(t_data *data, int direction);
 void    move_forward_back(t_data *data, int dir);
 void	move_left_right(t_data *data, int dir);
 
 void	draw_compass(t_img img, int width, int height, int color);
-void	draw_background_player(t_img img, int width, int height, int color);
 void	put_pixel(t_img img, int width, int height, int color);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-/* DISPLAY MINIMAP */
-void	create_images(t_data *data);
-void	display_minimap(t_data *data);
+//void	create_images(t_data *data);
+//void	print_map(t_data *data);
 
 void	init_ray(t_data *data);
 int		hit_wall(t_data *data, double x, double y, char flag);
@@ -107,6 +104,9 @@ int		close_win(void);
 
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode);
+
+/* RAY */
+double normalize_angle(double angle);
 
 /* DRAW WALL */
 void	display_wall(t_data *data, int ray);
