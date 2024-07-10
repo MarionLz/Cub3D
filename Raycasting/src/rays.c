@@ -17,9 +17,15 @@ void	init_ray(t_data *data)
 		h_distance = get_horizontal_distance(data);
 		v_distance = get_vertical_distance(data);
 		if (h_distance <= v_distance || data->ray.vert_dir == 1)
+		{
 			data->ray.r_distance = h_distance;
+			data->ray.flag = 1;
+		}
 		else if (v_distance < h_distance || data->ray.horiz_dir == 1)
+		{
 			data->ray.r_distance = v_distance;
+			data->ray.flag = 0;
+		}
 		display_wall(data, ray);
 		ray++;
 		data->ray.r_angle += data->player.fov_rad / SCR_WIDTH;
