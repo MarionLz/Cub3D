@@ -1,6 +1,6 @@
 #include "../include/cub3D.h"
 
-int	get_texture(t_data *data)
+/* int	get_texture(t_data *data)
 {
 	data->ray.r_angle = normalize_angle(data->ray.r_angle);
 	if (data->ray.flag == 0)
@@ -33,22 +33,22 @@ void	get_text_x(t_data *data, int text_nb)
 		if (text_nb == 2)
 			data->text_x = data->texture[text_nb].height - data->text_x;
 	}
-}
+} */
 
 void	draw_wall(t_data *data, int top_pix, int bottom_pix, int ray)
 {
-	int		text_nb;
-	double	step;
+	//int		text_nb;
+	//double	step;
 
-	text_nb = get_texture(data);
-	step = data->texture[text_nb].height / data->wall_height;
-	data->text_y = (top_pix - SCR_HEIGHT / 2 + data->wall_height / 2) * step;
-	get_text_x(data, text_nb);
+	//text_nb = get_texture(data);
+	//step = data->texture[text_nb].height / data->wall_height;
+	//data->text_y = (top_pix - SCR_HEIGHT / 2 + data->wall_height / 2) * step;
+	//get_text_x(data, text_nb);
 	while (top_pix < bottom_pix)
 	{
-		data->color = data->wall[text_nb][data->texture[text_nb].height * data->text_y
-			+ data->text_x];
-		data->text_y += step;
+		//data->color = data->wall[text_nb][data->texture[text_nb].height * data->text_y
+			//+ data->text_x];
+		//data->text_y += step;
 		my_mlx_pixel_put(&data->img_screen, ray, top_pix, 0x00FF0000);
 		top_pix++;
 	}

@@ -26,7 +26,7 @@ void	init_data(t_data *data)
 
 //convert the xpm file sent into a void* image that can be used by
 //the program
-void	*convert_img(t_data *data, char *path)
+/* void	*convert_img(t_data *data, char *path)
 {
 	void	*img;
 
@@ -77,4 +77,4 @@ void	init_textures(t_data *data)
 		mlx_destroy_image(data->mlx, data->texture[i].img);
 		i++;
 	}
-}
+} */
