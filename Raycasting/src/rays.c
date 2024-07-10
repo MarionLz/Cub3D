@@ -8,7 +8,7 @@ void	init_ray(t_data *data)
 
 	ray = 0;
 	data->ray.r_angle = data->player.p_angle - (data->player.fov_rad / 2);
-	data->ray.r_angle = normalize_angle(data->ray.r_angle);
+	//data->ray.r_angle = normalize_angle(data->ray.r_angle);
 	data->img_screen.img = mlx_new_image(data->mlx, SCR_WIDTH, SCR_HEIGHT);
 	data->img_screen.addr = mlx_get_data_addr(data->img_screen.img, &data->img_screen.bits_per_pixel,
 					&data->img_screen.line_length, &data->img_screen.endian);
@@ -62,8 +62,9 @@ double	get_horizontal_distance(t_data *data)
 	double inter_y = 0;
 
 	data->ray.horiz_dir = 0;
-	if (data->ray.r_angle == 0 || data->ray.r_angle == PI)
-		return (data->ray.horiz_dir = 1);
+	data->ray.r_angle = normalize_angle(data->ray.r_angle);
+	/*if (data->ray.r_angle == 0 || data->ray.r_angle == PI)
+		return (data->ray.horiz_dir = 1);*/
 	if (data->ray.r_angle < PI)
 	{
 		h_y = (data->player.p_y / data->height_square) * data->height_square + data->height_square;
@@ -75,9 +76,11 @@ double	get_horizontal_distance(t_data *data)
 	{
 		h_y = (data->player.p_y / data->height_square) * data->height_square;
 		h_x = (h_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
-		inter_y = -data->height_square;
+		inter_y = -data->height_square; 
 		inter_x = inter_y / tan(data->ray.r_angle);
 	}
+	if ((data->ray.r_angle > P2 && data->ray.r_angle < P3 && inter_x > 0) || ((data->ray.r_angle > P3 || data->ray.r_angle < P2) && inter_x < 0))
+		inter_x *= -1;
 	while (hit_wall(data, h_x, h_y, 'H') == 1)
 	{
 		h_x += inter_x;
@@ -96,8 +99,9 @@ double	get_vertical_distance(t_data *data)
 	double inter_y = 0;
 
 	data->ray.vert_dir = 0;
-	if (data->ray.r_angle == P2 || data->ray.r_angle == P3)
-		return (data->ray.vert_dir = 1);
+	data->ray.r_angle = normalize_angle(data->ray.r_angle);
+	/*if (data->ray.r_angle == P2 || data->ray.r_angle == P3)
+		return (data->ray.vert_dir = 1);*/
 	// look left
 	if (data->ray.r_angle > P2 && data->ray.r_angle < P3)
 	{
@@ -114,6 +118,8 @@ double	get_vertical_distance(t_data *data)
 		inter_x = data->width_square;
 		inter_y = inter_x * tan(data->ray.r_angle);
 	}
+	if ((data->ray.r_angle > 0 && data->ray.r_angle < PI && inter_y < 0) || (data->ray.r_angle > PI && data->ray.r_angle < 2*PI && inter_y > 0))
+		inter_y *= -1;
 	while (hit_wall(data, v_x, v_y, 'V') == 1)
 	{
 		v_x += inter_x;

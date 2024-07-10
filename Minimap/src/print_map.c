@@ -2,7 +2,7 @@
 
 void	create_images(t_data *data)
 {
-	//compass
+	/*//compass
 	data->img_compass.img = mlx_new_image(data->mlx, data->width_square, data->height_square);
 	data->img_compass.addr = mlx_get_data_addr(data->img_compass.img, &data->img_compass.bits_per_pixel, &data->img_compass.line_length, &data->img_compass.endian);
 	draw_compass(data->img_compass, data->width_square, data->height_square, 0x00FF0000);
@@ -25,12 +25,16 @@ void	create_images(t_data *data)
 	//floor
 	data->img_floor.img = mlx_new_image(data->mlx, data->width_square, data->height_square);
 	data->img_floor.addr = mlx_get_data_addr(data->img_floor.img, &data->img_floor.bits_per_pixel, &data->img_floor.line_length, &data->img_floor.endian);
-	put_pixel(data->img_floor, data->width_square, data->height_square, 0xA9A9A9);
+	put_pixel(data->img_floor, data->width_square, data->height_square, 0xA9A9A9);*/
 
 	//dot_ray
-	data->img_dot.img = mlx_new_image(data->mlx, 5, 5);
-	data->img_dot.addr = mlx_get_data_addr(data->img_dot.img, &data->img_dot.bits_per_pixel, &data->img_dot.line_length, &data->img_dot.endian);
-	put_pixel(data->img_dot, 5, 5, 0x00FF0000);
+	data->img_dotv.img = mlx_new_image(data->mlx, 5, 5);
+	data->img_dotv.addr = mlx_get_data_addr(data->img_dotv.img, &data->img_dotv.bits_per_pixel, &data->img_dotv.line_length, &data->img_dotv.endian);
+	put_pixel(data->img_dotv, 5, 5, 0x00FF00);
+
+	data->img_doth.img = mlx_new_image(data->mlx, 5, 5);
+	data->img_doth.addr = mlx_get_data_addr(data->img_doth.img, &data->img_doth.bits_per_pixel, &data->img_doth.line_length, &data->img_doth.endian);
+	put_pixel(data->img_doth, 5, 5, 0x00FF0000);
 }
 
 void	print_map(t_data *data)
@@ -54,9 +58,4 @@ void	print_map(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img_compass.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->img_player.img, data->player.p_x, data->player.p_y);
-}
-
-void	print_minimap()
-{
-	
 }

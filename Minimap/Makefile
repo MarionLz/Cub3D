@@ -5,8 +5,8 @@ CFLAGS = -Wall -Wextra -Werror -I./inc -Imlx_linux -O3
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-SRCS =	$(SRC_DIR)main.c $(SRC_DIR)init.c $(SRC_DIR)draw_pixels.c $(SRC_DIR)print_map.c $(SRC_DIR)player.c $(SRC_DIR)error_exit.c \
-		$(SRC_DIR)rays.c $(SRC_DIR)key.c \
+SRCS =	$(SRC_DIR)main.c $(SRC_DIR)init.c $(SRC_DIR)draw_pixels.c $(SRC_DIR)print_map.c $(SRC_DIR)moves.c $(SRC_DIR)error_exit.c \
+		$(SRC_DIR)rays.c $(SRC_DIR)key.c  $(SRC_DIR)display_minimap.c \
 
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 

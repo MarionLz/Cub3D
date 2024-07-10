@@ -2,18 +2,18 @@
 
 int	key_press(int keycode, t_data *data)
 {
-	//rotate left
-    if (keycode == ROTATE_LEFT)
-        rotate_player(data, 1);
-    //rotate right
+	if (keycode == ROTATE_LEFT)
+		rotate(data, 1);
 	if (keycode == ROTATE_RIGHT)
-        rotate_player(data, -1);
-    //forward
+		rotate(data, -1);
 	if (keycode == FORWARD)
-        move_player(data, 1);
-	//back
-    if (keycode == BACK)
-        move_player(data, -1);
+		move_forward_back(data, 1);
+	if (keycode == BACK)
+		move_forward_back(data, -1);
+	if (keycode == LEFT)
+		move_left_right(data, -1);
+	if (keycode == RIGHT)
+		move_left_right(data, 1);
     return (0);
 }
 

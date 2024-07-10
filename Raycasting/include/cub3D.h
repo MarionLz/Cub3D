@@ -12,8 +12,10 @@
 #define P2 PI/2
 #define P3 3*PI/2
 
-# define SCR_WIDTH 1900 // screen Width
-# define SCR_HEIGHT 1000 // screen Heigth
+# define SCR_WIDTH 1080 // screen Width
+# define SCR_HEIGHT 720 // screen Heigth
+# define SQUARE_SIZE 64
+
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 # define BACK			115

@@ -52,7 +52,7 @@ void	raycasting(t_data *data)
 	data->ray.r_angle = data->player.p_angle - (data->player.fov_rad / 2);
 
 	//boucle pour caster chaque rayon
-	while (ray < data->width)
+	while (ray < SCR_WIDTH)
 	{
 		h_inter = get_h_inter(data);
 		v_inter = get_v_inter(data);
@@ -66,6 +66,6 @@ void	raycasting(t_data *data)
 		ray++;
 
 		//passage au prochain angle
-		data->ray.r_angle += (data->player.fov_rad / data->width);
+		data->ray.r_angle += (data->player.fov_rad / SCR_WIDTH);
 	}
 }
