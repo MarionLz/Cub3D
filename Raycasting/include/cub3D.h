@@ -12,6 +12,7 @@
 #define P2 PI/2
 #define P3 3*PI/2
 
+# define SQUARE_SIZE 64
 # define SCR_WIDTH 1900 // screen Width
 # define SCR_HEIGHT 1000 // screen Heigth
 # define ROTATE_LEFT	65361
@@ -26,7 +27,7 @@
 //# define LEFT			97
 
 //struc for my_mlx_pixel_put
-typedef struct  s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -34,6 +35,17 @@ typedef struct  s_img
 	int		line_length;
 	int		endian;
 }	t_img;
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		height;
+	int		width;
+}	t_texture;
 
 typedef struct s_ray
 {
@@ -47,6 +59,7 @@ typedef struct s_ray
 	double	vert_x;
 	double	vert_y;
 	int		vert_dir;
+	int		flag;
 }	t_ray;
 
 typedef struct s_player
@@ -69,6 +82,8 @@ typedef struct  s_data
 	int			width_square;
 	int			height_square;
 	int			map[10][10];
+	int			wall_height;
+	char		**wall;
 	t_img		img_player;
 	t_img		img_wall;
 	t_img		img_floor;
@@ -77,7 +92,11 @@ typedef struct  s_data
 	t_img		img_dot;
 	t_img		img_screen;
 	t_player	player;
+	t_texture	texture[4];
 	double		delta_angle;
+	int			text_y;
+	int			text_x;
+	unsigned int	color;
 	t_ray		ray;
 }	t_data;
 
