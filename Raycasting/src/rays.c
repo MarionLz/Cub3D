@@ -8,7 +8,6 @@ void	init_ray(t_data *data)
 
 	ray = 0;
 	data->ray.r_angle = data->player.p_angle - (data->player.fov_rad / 2);
-	data->ray.r_angle = normalize_angle(data->ray.r_angle);
 	data->img_screen.img = mlx_new_image(data->mlx, SCR_WIDTH, SCR_HEIGHT);
 	data->img_screen.addr = mlx_get_data_addr(data->img_screen.img, &data->img_screen.bits_per_pixel,
 					&data->img_screen.line_length, &data->img_screen.endian);
@@ -68,6 +67,7 @@ double	get_horizontal_distance(t_data *data)
 	double inter_y = 0;
 
 	data->ray.horiz_dir = 0;
+	data->ray.r_angle = normalize_angle(data->ray.r_angle);
 	if (data->ray.r_angle == 0 || data->ray.r_angle == PI)
 		return (data->ray.horiz_dir = 1);
 	if (data->ray.r_angle < PI)
@@ -102,6 +102,7 @@ double	get_vertical_distance(t_data *data)
 	double inter_y = 0;
 
 	data->ray.vert_dir = 0;
+	data->ray.r_angle = normalize_angle(data->ray.r_angle);
 	if (data->ray.r_angle == P2 || data->ray.r_angle == P3)
 		return (data->ray.vert_dir = 1);
 	// look left
