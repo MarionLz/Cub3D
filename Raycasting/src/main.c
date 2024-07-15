@@ -1,13 +1,13 @@
 #include "../include/cub3D.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_data	data = {
 		.map = {
 			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -17,6 +17,7 @@ int	main(void)
 		}
 	};
 	init_data(&data);
+	parse_map(ac, av);
 	init_textures(&data);
 	printf("%ls\n", data.texture[0].addr);
 	//create_images(&data);
