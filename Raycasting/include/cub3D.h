@@ -2,6 +2,8 @@
 #define CUB3D
 
 #include "../mlx_linux/mlx.h"
+#include "../libft/inc/get_next_line.h"
+#include "../libft/inc/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -20,11 +22,11 @@
 # define BACK			115
 # define RIGHT			100
 //azerty :
-# define FORWARD		122
-# define LEFT			113
+//# define FORWARD		122
+//# define LEFT			113
 //qwerty :
-//# define FORWARD		119
-//# define LEFT			97
+# define FORWARD		119
+# define LEFT			97
 
 //struc for my_mlx_pixel_put
 typedef struct s_img
@@ -124,8 +126,11 @@ int		close_win(void);
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode);
 
+/* PARSE MAP */
+void	parse_file(int ac, char **av);
+
 /* RAY */
-double normalize_angle(double angle);
+double	normalize_angle(double angle);
 
 /* DRAW WALL */
 void	display_wall(t_data *data, int ray);
