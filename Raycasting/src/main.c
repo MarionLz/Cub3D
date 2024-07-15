@@ -17,6 +17,8 @@ int	main(void)
 		}
 	};
 	init_data(&data);
+	init_textures(&data);
+	printf("%ls\n", data.texture[0].addr);
 	//create_images(&data);
 	//print_map(&data);
 	init_ray(&data);
