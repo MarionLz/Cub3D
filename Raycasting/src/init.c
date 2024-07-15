@@ -13,25 +13,42 @@ void	init_data(t_data *data)
 	}
 	data->nb_colomn = 10;
 	data->nb_rows = 10;
-	data->width_square = SCR_WIDTH / data->nb_colomn;
-	data->height_square = SCR_HEIGHT / data->nb_rows;
+	//data->width_square = SCR_WIDTH / data->nb_colomn;
+	//data->height_square = SCR_HEIGHT / data->nb_rows;
 	data->player.p_x = 390;
 	data->player.p_y = 510;
 	data->player.p_speed = 10;
 	data->player.p_angle = 0;
 	data->player.fov_rad = (FOV * PI / 180);
+	data->text_y = 0;
+	data->text_x = 0;
 	data->delta_angle = 0.1;
 	data->ray.flag = 0;
+	data->color = 0;
+}
+
+void	init_texture_data(t_data *data/*, char **argv */)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->texture[i].width = TILE_SIZE;
+		data->texture[i].height = TILE_SIZE;
+		i++;
+	}
+	//extract_textures(data, argv[1]);
 }
 
 //convert the xpm file sent into a void* image that can be used by
 //the program
-/* void	*convert_img(t_data *data, char *path)
+void	*convert_img(t_data *data, char *path, int i)
 {
 	void	*img;
 
-	img = mlx_xpm_file_to_image(data->mlx, path, &(data->texture->width),
-			&(data->texture->height));
+	img = mlx_xpm_file_to_image(data->mlx, path, &(data->texture[i].width),
+			&(data->texture[i].width));
 	return (img);
 }
 
@@ -69,12 +86,18 @@ void	init_textures(t_data *data)
 	int	i;
 
 	i = 0;
+	init_texture_data(data);
 	while (i < 4)
 	{
-		data->texture[i].img = convert_img(data, "../assets/textures/texture1.xpm");
-		data->texture[i].addr = get_data_address(&(data->texture[i]));
+		data->texture[i].img = convert_img(data, "./assets/textures/fox.xpm", i);
+		if (!data->texture[i].img)
+			printf("failed to load img/n");
+		data->texture[i].addr = (int *)get_data_address(&(data->texture[i]));
+		if (!data->texture[i].addr)
+			printf("failed to load texture address\n");
+		printf("%ls\n", data->texture[i].addr);
 		store_textures_pixels(data, i);
-		mlx_destroy_image(data->mlx, data->texture[i].img);
+		//mlx_destroy_image(data->mlx, data->texture[i].img);
 		i++;
 	}
-} */
+}

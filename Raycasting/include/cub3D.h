@@ -12,7 +12,7 @@
 #define P2 PI/2
 #define P3 3*PI/2
 
-# define SQUARE_SIZE 64
+# define TILE_SIZE 64
 # define SCR_WIDTH 1900 // screen Width
 # define SCR_HEIGHT 1000 // screen Heigth
 # define ROTATE_LEFT	65361
@@ -39,7 +39,7 @@ typedef struct s_img
 typedef struct s_texture
 {
 	void	*img;
-	char	*addr;
+	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -82,8 +82,8 @@ typedef struct  s_data
 	int			width_square;
 	int			height_square;
 	int			map[10][10];
-	int			wall_height;
-	char		**wall;
+	double		wall_height;
+	int			wall[4][TILE_SIZE * TILE_SIZE];
 	t_img		img_player;
 	t_img		img_wall;
 	t_img		img_floor;
@@ -129,5 +129,8 @@ double normalize_angle(double angle);
 
 /* DRAW WALL */
 void	display_wall(t_data *data, int ray);
+
+/* INIT */
+void	init_textures(t_data *data);
 
 # endif

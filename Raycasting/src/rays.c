@@ -15,12 +15,12 @@ void	init_ray(t_data *data)
 	{
 		h_distance = get_horizontal_distance(data);
 		v_distance = get_vertical_distance(data);
-		if (h_distance <= v_distance || data->ray.vert_dir == 1)
+		if (h_distance <= v_distance /* || data->ray.vert_dir == 1 */)
 		{
 			data->ray.r_distance = h_distance;
 			data->ray.flag = 1;
 		}
-		else if (v_distance < h_distance || data->ray.horiz_dir == 1)
+		else if (v_distance < h_distance /* || data->ray.horiz_dir == 1 */)
 		{
 			data->ray.r_distance = v_distance;
 			data->ray.flag = 0;
@@ -46,12 +46,12 @@ int		hit_wall(t_data *data, double x, double y, char flag)
 	int	map_x;
 	int	map_y;
 
-	map_x = x / data->width_square;
+	map_x = x / TILE_SIZE;
 	if (flag == 'V' && data->ray.r_angle > P2 && data->ray.r_angle < P3)
-		map_x = x / data->width_square - 1;
-	map_y = y / data->height_square;
+		map_x = x / TILE_SIZE - 1;
+	map_y = y / TILE_SIZE;
 	if (flag == 'H' && data->ray.r_angle > PI)
-		map_y = y / data->height_square - 1;
+		map_y = y / TILE_SIZE - 1;
 	if (map_x < 0 || map_y < 0 || map_x >= data->nb_colomn || map_y >= data->nb_rows)
 		return(0);
 	if (data->map[map_y][map_x] == 1)
@@ -72,16 +72,16 @@ double	get_horizontal_distance(t_data *data)
 		return (data->ray.horiz_dir = 1);
 	if (data->ray.r_angle < PI)
 	{
-		h_y = (data->player.p_y / data->height_square) * data->height_square + data->height_square;
+		h_y = (data->player.p_y / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
 		h_x = (h_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
-		inter_y = data->height_square;
+		inter_y = TILE_SIZE;
 		inter_x = inter_y / tan(data->ray.r_angle);
 	}
 	else if (data->ray.r_angle > PI)
 	{
-		h_y = (data->player.p_y / data->height_square) * data->height_square;
+		h_y = (data->player.p_y / TILE_SIZE) * TILE_SIZE;
 		h_x = (h_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
-		inter_y = -data->height_square;
+		inter_y = -TILE_SIZE;
 		inter_x = inter_y / tan(data->ray.r_angle);
 	}
 	while (hit_wall(data, h_x, h_y, 'H') == 1)
@@ -108,17 +108,17 @@ double	get_vertical_distance(t_data *data)
 	// look left
 	if (data->ray.r_angle > P2 && data->ray.r_angle < P3)
 	{
-		v_x = (int)(data->player.p_x / data->width_square) * data->width_square;
+		v_x = (int)(data->player.p_x / TILE_SIZE) * TILE_SIZE;
 		v_y = (v_x - data->player.p_x) * tan(data->ray.r_angle) + data->player.p_y;
-		inter_x = -data->width_square;
+		inter_x = -TILE_SIZE;
 		inter_y = inter_x * tan(data->ray.r_angle);
 	}
 	// look right
 	if (data->ray.r_angle < P2 || data->ray.r_angle > P3)
 	{
-		v_x = (int)(data->player.p_x / data->width_square) * data->width_square + data->width_square;
+		v_x = (int)(data->player.p_x / TILE_SIZE) * TILE_SIZE + TILE_SIZE;
 		v_y = (v_x - data->player.p_x) * tan(data->ray.r_angle) + data->player.p_y;
-		inter_x = data->width_square;
+		inter_x = TILE_SIZE;
 		inter_y = inter_x * tan(data->ray.r_angle);
 	}
 	while (hit_wall(data, v_x, v_y, 'V') == 1)

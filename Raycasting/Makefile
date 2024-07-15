@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I./inc -Imlx_linux -O3
+CFLAGS = -Wall -Wextra -Werror -g -I./inc -Imlx_linux -O3
 
 SRC_DIR = src/
 OBJ_DIR = obj/

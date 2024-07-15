@@ -1,6 +1,6 @@
 #include "../include/cub3D.h"
 
-/* int	get_texture(t_data *data)
+int	get_texture(t_data *data)
 {
 	data->ray.r_angle = normalize_angle(data->ray.r_angle);
 	if (data->ray.flag == 0)
@@ -23,33 +23,34 @@ void	get_text_x(t_data *data, int text_nb)
 {
 	if (data->ray.flag == 1)
 	{
-		data->text_x = fmodf(data->ray.horiz_x, data->texture[text_nb].height);
+		data->text_x = fmodf(data->ray.horiz_x, TILE_SIZE);
 		if (text_nb == 1)
-			data->text_x = data->texture[text_nb].height - data->text_x;
+			data->text_x = TILE_SIZE - data->text_x;
 	}
 	else
 	{
-		data->text_x = fmodf(data->ray.horiz_y, data->texture[text_nb].height);
+		data->text_x = fmodf(data->ray.vert_y, TILE_SIZE);
 		if (text_nb == 2)
-			data->text_x = data->texture[text_nb].height - data->text_x;
+			data->text_x = TILE_SIZE - data->text_x;
 	}
-} */
+}
 
 void	draw_wall(t_data *data, int top_pix, int bottom_pix, int ray)
 {
-	//int		text_nb;
-	//double	step;
+	int		text_nb;
+	double	step;
+	double	pos_y;
 
-	//text_nb = get_texture(data);
-	//step = data->texture[text_nb].height / data->wall_height;
-	//data->text_y = (top_pix - SCR_HEIGHT / 2 + data->wall_height / 2) * step;
-	//get_text_x(data, text_nb);
+	text_nb = get_texture(data);
+	step = TILE_SIZE / data->wall_height;
+	pos_y = (top_pix - SCR_HEIGHT / 2 + data->wall_height / 2) * step;
+	get_text_x(data, text_nb);
 	while (top_pix < bottom_pix)
 	{
-		//data->color = data->wall[text_nb][data->texture[text_nb].height * data->text_y
-			//+ data->text_x];
-		//data->text_y += step;
-		my_mlx_pixel_put(&data->img_screen, ray, top_pix, 0x00FF0000);
+		data->text_y = pos_y;
+		data->color = data->wall[text_nb][TILE_SIZE * data->text_y + data->text_x];
+		pos_y += step;
+		my_mlx_pixel_put(&data->img_screen, ray, top_pix, data->color);
 		top_pix++;
 	}
 }
@@ -61,13 +62,13 @@ void	draw_floor_and_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
 	i = bottom_pix;
 	while (i < SCR_HEIGHT)
 	{
-		my_mlx_pixel_put(&data->img_screen, ray, i, 0x0000FF00);
+		my_mlx_pixel_put(&data->img_screen, ray, i, 0xF5F5DC);
 		i++;
 	}
 	i = 0;
 	while (i < top_pix)
 	{
-		my_mlx_pixel_put(&data->img_screen, ray, i, 0x000000FF);
+		my_mlx_pixel_put(&data->img_screen, ray, i, 0x696969);
 		i++;
 	}
 }
@@ -81,7 +82,7 @@ void	display_wall(t_data *data, int ray)
 	data->ray.r_distance *= cos(normalize_angle(data->ray.r_angle - data->player.p_angle));
 
 	//calcul hauteur en pixel du mur a afficher
-	data->wall_height = (SQUARE_SIZE / data->ray.r_distance) *
+	data->wall_height = (TILE_SIZE / data->ray.r_distance) *
 				((SCR_WIDTH / 2) / tan(data->player.fov_rad / 2));
 
 	//calcul de la position du top pixel et du bottom pixel
