@@ -62,6 +62,7 @@ void	draw_floor_and_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
 	i = bottom_pix;
 	while (i < SCR_HEIGHT)
 	{
+
 		my_mlx_pixel_put(&data->img_screen, ray, i, data->floor_color);
 		i++;
 	}

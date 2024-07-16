@@ -6,7 +6,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 SRCS =	$(SRC_DIR)main.c $(SRC_DIR)init.c $(SRC_DIR)draw_pixels.c $(SRC_DIR)print_map.c $(SRC_DIR)moves.c $(SRC_DIR)error_exit.c \
-		$(SRC_DIR)rays.c $(SRC_DIR)key.c $(SRC_DIR)draw_wall.c \
+		$(SRC_DIR)rays.c $(SRC_DIR)key.c $(SRC_DIR)draw_wall.c $(SRC_DIR)parse_file.c $(SRC_DIR)parse_map.c\
 
 OBJS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
@@ -30,4 +30,10 @@ fclean: clean
 	$(MAKE) -C libft fclean
 	rm -rf $(NAME)
 
-re: fclean all
+re: fclean all<<<<<<< gautier
+10
+ 
+    $(SRC_DIR)rays.c $(SRC_DIR)key.c $(SRC_DIR)draw_wall.c \
+11
+ 
+=======
