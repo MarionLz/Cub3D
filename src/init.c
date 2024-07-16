@@ -1,5 +1,6 @@
 #include "../include/cub3D.h"
 
+
 void	init_p_angle(t_data *data, char dir)
 {
 	if (dir == 'N')
@@ -105,7 +106,7 @@ void	init_textures(t_data *data)
 	init_texture_data(data);
 	while (i < 4)
 	{
-		data->texture[i].img = convert_img(data, "./assets/textures/fox.xpm", i);
+		data->texture[i].img = convert_img(data, data->texture[i].path, i);
 		if (!data->texture[i].img)
 			printf("failed to load img/n");
 		data->texture[i].addr = (int *)get_data_address(&(data->texture[i]));

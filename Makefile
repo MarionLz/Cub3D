@@ -30,4 +30,10 @@ fclean: clean
 	$(MAKE) -C libft fclean
 	rm -rf $(NAME)
 
-re: fclean all
+re: fclean all<<<<<<< gautier
+10
+ 
+    $(SRC_DIR)rays.c $(SRC_DIR)key.c $(SRC_DIR)draw_wall.c \
+11
+ 
+=======

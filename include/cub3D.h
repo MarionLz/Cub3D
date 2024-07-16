@@ -49,6 +49,7 @@ typedef struct s_texture
 	int		endian;
 	int		height;
 	int		width;
+	char	*path;
 }	t_texture;
 
 typedef struct s_ray
@@ -102,6 +103,9 @@ typedef struct  s_data
 	int			text_y;
 	int			text_x;
 	unsigned int	color;
+	unsigned int	floor_color;
+	unsigned int	ceiling_color;
+	t_ray		ray;
 	t_ray		ray;
 }	t_data;
 
@@ -154,5 +158,12 @@ void	display_wall(t_data *data, int ray);
 
 /* INIT */
 void	init_textures(t_data *data);
+
+/* UTILS */
+unsigned int	rgb_to_hexadecimal(int r, int g, int b);
+void			free_tab(char **tab);
+
+/* ERROR */
+void	ft_error(char *message);
 
 # endif
