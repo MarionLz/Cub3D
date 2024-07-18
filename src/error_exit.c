@@ -22,6 +22,13 @@ void	error_file(t_data *data, char *line, char *error_msg)
 	exit(1);
 }
 
+void	check_counts(t_data *data)
+{
+	if (data->no > 1 || data->so > 1 || data->we > 1 || data->ea > 1)
+		display_error(".cub file must have only one path per direction");
+	if (data->c_count > 1 || data->f_count > 1)
+		display_error(".cub file must have only one color for the floor or the ceiling");
+}
 void    free_map(char **map)
 {
     int i;

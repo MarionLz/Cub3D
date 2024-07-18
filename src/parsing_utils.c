@@ -1,34 +1,5 @@
 #include "../include/cub3D.h"
 
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	ft_putnbr(long long int nb, int base, int *count)
-{
-	char *hexa = "0123456789abcdef";
-
-	if (nb < 0)
-	{
-		nb = -nb;
-		*count += write(1, "-", 1);
-	}
-	if (nb >= base)
-		ft_putnbr((nb / base), base, count);
-	*count += write(1, &hexa[nb % base], 1);
-}
-
 void	check_floor_ceiling_format(char **colors)
 {
 	int	i;
@@ -38,18 +9,18 @@ void	check_floor_ceiling_format(char **colors)
 	while (colors[i])
 	{
 		j = 0;
-		printf("%s\n", colors[i]);
 		while (colors[i][j])
 		{
 			if (!ft_isdigit(colors[i][j]) && colors[i][j] != '\n')
-				display_error("1colors components must be 3 digits set between\
-0 and 255, separated by a ','");
+				display_error("colors components must be 3 digits set between\
+ 0 and 255, separated by a ',' without space");
 			j++;
 		}
 		i++;
 	}
 	if (i != 3)
-		display_error("2colors components must be 3 digits set between 0 and 255, separated by a ','");
+		display_error("colors components must be 3 digits set between 0 and 255,\
+ separated by a ',' without space");
 }
 
 char	*get_path(const char *s)
@@ -72,6 +43,13 @@ char	*get_path(const char *s)
 	while (j < len)
 		dest[j++] = s[i++];
 	dest[j] = '\0';
-	//printf("%s\n", dest);
 	return (dest);
+}
+
+void	load_path(t_data *data, char *line, int i, int *dir)
+{
+	data->texture[i].path = get_path(&line[3]);
+	*dir += 1;
+	if (!data->texture[i].path)
+		display_error("a path to texture's file must be provided\n");
 }
