@@ -19,15 +19,14 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	check_arguments(ac, av);
+	init_data(&data);
 	parse_file(av, &data);
-	//init_data(&data);
-	//init_textures(&data);
-	//printf("%ls\n", data.texture[0].addr);
+	init_textures(&data);
 	//create_images(&data);
 	//print_map(&data);
-	//init_ray(&data);
-	//mlx_hook(data.win, 02, 1L<<0, &key_press, &data); //key_press : move the player
-	//mlx_hook(data.win, 03, 1L<<1, &key_release, 0); //key_release : close the window with ESC
-	//mlx_hook(data.win, 17, 0, &close_win, &data); // close the window with the red cross
-	//mlx_loop(data.mlx);
+	init_ray(&data);
+	mlx_hook(data.win, 02, 1L<<0, &key_press, &data); //key_press : move the player
+	mlx_hook(data.win, 03, 1L<<1, &key_release, 0); //key_release : close the window with ESC
+	mlx_hook(data.win, 17, 0, &close_win, &data); // close the window with the red cross
+	mlx_loop(data.mlx);
 }

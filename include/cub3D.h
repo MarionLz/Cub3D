@@ -103,9 +103,8 @@ typedef struct  s_data
 	int			text_y;
 	int			text_x;
 	unsigned int	color;
-	unsigned int	floor_color;
-	unsigned int	ceiling_color;
-	t_ray		ray;
+	unsigned long	floor_color;
+	unsigned long	ceiling_color;
 	t_ray		ray;
 }	t_data;
 
@@ -162,6 +161,8 @@ void	init_textures(t_data *data);
 /* UTILS */
 unsigned int	rgb_to_hexadecimal(int r, int g, int b);
 void			free_tab(char **tab);
+void			check_floor_ceiling_format(char **colors);
+char			*get_path(const char *s);
 
 /* ERROR */
 void	ft_error(char *message);
