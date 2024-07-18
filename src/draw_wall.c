@@ -1,5 +1,6 @@
 #include "../include/cub3D.h"
 
+// 0 = NO ; 1 = SO ; 2 = WE ; 3 = EA
 int	get_texture(t_data *data)
 {
 	data->ray.r_angle = normalize_angle(data->ray.r_angle);
@@ -50,6 +51,8 @@ void	draw_wall(t_data *data, int top_pix, int bottom_pix, int ray)
 		data->text_y = pos_y;
 		data->color = data->wall[text_nb][TILE_SIZE * data->text_y + data->text_x];
 		pos_y += step;
+		if (data->ray.flag == 0)
+			data->color = (data->color >> 1) & 8355711;
 		my_mlx_pixel_put(&data->img_screen, ray, top_pix, data->color);
 		top_pix++;
 	}
