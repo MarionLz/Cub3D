@@ -63,13 +63,13 @@ void	draw_floor_and_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
 	while (i < SCR_HEIGHT)
 	{
 
-		my_mlx_pixel_put(&data->img_screen, ray, i, data->floor_color);
+		my_mlx_pixel_put(&data->img_screen, ray, i, 0x696969);
 		i++;
 	}
 	i = 0;
 	while (i < top_pix)
 	{
-		my_mlx_pixel_put(&data->img_screen, ray, i, data->ceiling_color);
+		my_mlx_pixel_put(&data->img_screen, ray, i, 0xDC6400);
 		i++;
 	}
 }

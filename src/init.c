@@ -44,7 +44,7 @@ void	init_data(t_data *data)
 	data->color = 0;
 }
 
-void	init_texture_data(t_data *data/*, char **argv */)
+void	init_texture_data(t_data *data)
 {
 	int	i;
 
@@ -55,7 +55,6 @@ void	init_texture_data(t_data *data/*, char **argv */)
 		data->texture[i].height = TILE_SIZE;
 		i++;
 	}
-	//extract_textures(data, argv[1]);
 }
 
 //convert the xpm file sent into a void* image that can be used by
@@ -85,12 +84,12 @@ void	store_textures_pixels(t_data *data, int i)
 	int	text_i;
 
 	y = 0;
-	while (y < data->texture[i].height)
+	while (y < TILE_SIZE)
 	{
 		x = 0;
-		while (x < data->texture[i].width)
+		while (x < TILE_SIZE)
 		{
-			text_i = data->texture[i].height * y + x;
+			text_i = TILE_SIZE * y + x;
 			data->wall[i][text_i] = data->texture[i].addr[text_i];
 			x++;
 		}
@@ -112,7 +111,6 @@ void	init_textures(t_data *data)
 		data->texture[i].addr = (int *)get_data_address(&(data->texture[i]));
 		if (!data->texture[i].addr)
 			printf("failed to load texture address\n");
-		printf("%ls\n", data->texture[i].addr);
 		store_textures_pixels(data, i);
 		//mlx_destroy_image(data->mlx, data->texture[i].img);
 		i++;
