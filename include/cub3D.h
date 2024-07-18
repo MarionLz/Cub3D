@@ -88,6 +88,12 @@ typedef struct  s_data
 	int			nb_rows;
 	int			width_square;
 	int			height_square;
+	int			no;
+	int			so;
+	int			we;
+	int			ea;
+	int			f_count;
+	int			c_count;
 	double		wall_height;
 	int			wall[4][TILE_SIZE * TILE_SIZE];
 	t_img		img_player;
@@ -108,7 +114,7 @@ typedef struct  s_data
 	t_ray		ray;
 }	t_data;
 
-int	check_arguments(int ac, char **av);
+int		check_arguments(int ac, char **av);
 
 /* INIT */
 void	init_p_angle(t_data *data, char dir);
@@ -117,7 +123,7 @@ void	init_data(t_data *data);
 
 /* MOVES */
 void	rotate(t_data *data, int direction);
-void    move_forward_back(t_data *data, int dir);
+void	move_forward_back(t_data *data, int dir);
 void	move_left_right(t_data *data, int dir);
 
 void	draw_compass(t_img img, int width, int height, int color);
@@ -136,8 +142,9 @@ double	get_vertical_distance(t_data *data);
 int		display_error(char *error_msg);
 void	error_map(t_data *data, char *error_msg);
 void	error_file(t_data *data, char *line, char *error_msg);
-void    free_map(char **map);
+void	free_map(char **map);
 int		close_win(void);
+void	check_counts(t_data *data);
 
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode);
@@ -159,12 +166,11 @@ void	display_wall(t_data *data, int ray);
 void	init_textures(t_data *data);
 
 /* UTILS */
-unsigned int	rgb_to_hexadecimal(int r, int g, int b);
-void			free_tab(char **tab);
-void			check_floor_ceiling_format(char **colors);
-char			*get_path(const char *s);
+void	check_floor_ceiling_format(char **colors);
+char	*get_path(const char *s);
+void	load_path(t_data *data, char *line, int i, int *dir);
 
-/* ERROR */
-void	ft_error(char *message);
+/* FREE */
+void	free_tab(char **tab);
 
 # endif

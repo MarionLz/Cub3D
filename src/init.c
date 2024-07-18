@@ -42,6 +42,12 @@ void	init_data(t_data *data)
 	data->delta_angle = 0.1;
 	data->ray.flag = 0;
 	data->color = 0;
+	data->no = 0;
+	data->so = 0;
+	data->we = 0;
+	data->ea = 0;
+	data->c_count = 0;
+	data->f_count = 0;
 }
 
 void	init_texture_data(t_data *data)
@@ -62,9 +68,23 @@ void	init_texture_data(t_data *data)
 void	*convert_img(t_data *data, char *path, int i)
 {
 	void	*img;
+	char	*txt;
 
 	img = mlx_xpm_file_to_image(data->mlx, path, &(data->texture[i].width),
 			&(data->texture[i].width));
+	if (!img)
+	{
+		if (i == 0)
+			txt = "NO";
+		else if (i == 1)
+			txt = "SO";
+		else if (i == 2)
+			txt = "WE";
+		else if (i == 3)
+			txt = "EA";
+		printf("error\npath to texture %s is invalid\n", txt);
+		exit (1);
+	}
 	return (img);
 }
 
@@ -84,12 +104,12 @@ void	store_textures_pixels(t_data *data, int i)
 	int	text_i;
 
 	y = 0;
-	while (y < TILE_SIZE)
+	while (y < data->texture[i].height)
 	{
 		x = 0;
-		while (x < TILE_SIZE)
+		while (x < data->texture[i].width)
 		{
-			text_i = TILE_SIZE * y + x;
+			text_i = data->texture[i].height * y + x;
 			data->wall[i][text_i] = data->texture[i].addr[text_i];
 			x++;
 		}
@@ -112,7 +132,7 @@ void	init_textures(t_data *data)
 		if (!data->texture[i].addr)
 			printf("failed to load texture address\n");
 		store_textures_pixels(data, i);
-		//mlx_destroy_image(data->mlx, data->texture[i].img);
+		mlx_destroy_image(data->mlx, data->texture[i].img);
 		i++;
 	}
 }

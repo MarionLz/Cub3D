@@ -4,33 +4,15 @@
 void	parse_textures(char *line, t_data *data)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-	{
-		data->texture[0].path = get_path(&line[3]);
-		//printf("%s\n", data->texture[0].path);
-		if (!data->texture[0].path)
-			display_error("a path to texture's file must be provided\n");
-	}
+		load_path(data, line, 0, &data->no);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-	{
-		data->texture[1].path = get_path(&line[3]);
-		//printf("%s\n", data->texture[1].path);
-		if (!data->texture[1].path)
-			display_error("a path to texture's file must be provided\n");
-	}
+		load_path(data, line, 1, &data->so);
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-	{
-		data->texture[2].path = get_path(&line[3]);
-		//printf("%s\n", data->texture[2].path);
-		if (!data->texture[2].path)
-			display_error("a path to texture's file must be provided\n");
-	}
+		load_path(data, line, 2, &data->we);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-	{
-		data->texture[3].path = get_path(&line[3]);
-		//printf("%s\n", data->texture[3].path);
-		if (!data->texture[3].path)
-			display_error("a path to texture's file must be provided\n");
-	}
+		load_path(data, line, 3, &data->ea);
+	else
+		display_error("path must be separated of the direction with a space");
 }
 
 
@@ -52,19 +34,20 @@ void	parse_floor_and_ceiling(char *line, t_data *data)
 	g = ft_atoi(colors[1]);
 	b = ft_atoi(colors[2]);
 	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
-		display_error("3colors components must be 3 digits set between 0 and 255, separated by a ','");
+		display_error("colors components must be 3 digits set between 0 and 255,\
+	 separated by a ',' without space");
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
 		tmp = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 		data->floor_color = tmp;
+		data->f_count += 1;
 	}
 	else if (ft_strncmp(line, "C", 1) == 0)
 	{
 		tmp = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 		data->ceiling_color = tmp;
+		data->c_count += 1;
 	}
-	printf("floor color : %lx\n", data->floor_color);
-	printf("ceiling color : %lx\n", data->ceiling_color);
 	free_tab(colors);
 }
 
@@ -84,8 +67,9 @@ int	is_map(char *str)
 
 int	parse_blocs(char *line, t_data *data, int file_blocs)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
+	check_counts(data);
+	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO ", 2) == 0
+		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA ", 2) == 0)
 	{
 		parse_textures(line, data);
 		file_blocs++;
@@ -98,10 +82,14 @@ int	parse_blocs(char *line, t_data *data, int file_blocs)
 	else if (is_map(line) == 1)
 	{
 		if (file_blocs < 2)
-			error_file(data, line, "File : map description must be at the end of the file.");
+			error_file(data, line, "File : map description must be at the end of the file");
 		parse_map(line, data);
 		return (file_blocs += 1);
 	}
+/* 	else
+		display_error("file must provide 4 valid paths to textures starting with NO, SO, WE, EA,\
+separated with a space.\nit also must provide a color for the floor and the ceiling, one for each,\
+ at the RGB format : 'F rrr,ggg,bbb'.\nit then must ends with the map"); */
 	return (file_blocs);
 }
 
