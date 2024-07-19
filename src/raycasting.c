@@ -1,71 +1,106 @@
-/*#include "../include/cub3D.h"
+#include "../include/cub3D.h"
 
-//prototype fonction de recuperation de la distance entre :
-//l'intersection ou rayon rencontre un mur sur une ligne horrizontale,
-// et la position du player.
-float	get_h_inter(t_data *data)
+int		hit_wall(t_data *data, double x, double y, char flag)
 {
-	float	h_x;
-	float	h_y;
-	float	x_step;
-	float	y_step;
-	int		pixel;
+	int	map_x;
+	int	map_y;
 
-	//x_step = distance horizontale entre les intersections horizontales successives
-	//y_step = distance verticale entre les intersections horizontales successives
-	y_step = data->width_square;
-	x_step = data->width_square / tan(data->ray.r_angle);
+	map_x = x / TILE_SIZE;
+	if (flag == 'V' && data->ray.r_angle > P2 && data->ray.r_angle < P3)
+		map_x = x / TILE_SIZE - 1;
+	map_y = y / TILE_SIZE;
+	if (flag == 'H' && data->ray.r_angle > PI)
+		map_y = y / TILE_SIZE - 1;
+	if (map_x < 0 || map_y < 0 || map_y >= data->nb_rows || map_x >= (int)ft_strlen(data->map[map_y]))
+		return(0);
+	if (data->map[map_y][map_x] == '1')
+		return (0);
+	return (1);
+}
 
-	//position en y de la première intersection horizontale.
-	h_y = floor(data->player.p_y / data->width_square) * data->width_square;
+double	get_horizontal_distance(t_data *data)
+{
+	double h_x;
+	double h_y;
+	double inter_x;
+	double inter_y;
 
-	//fonction pour obtenir première intersection horinzontale en fonction de l'angle 
-	//et ajuster y_step si nécessaire.
-	pixel = inter_check(data->ray.r_angle, &h_y, &y_step, 1);
-
-	//calcul de la coordonnee x de la premiere intersection horizontale
-	h_x = data->player.p_x + (h_y - data->player.p_y) / tan(data->ray.r_angle);
-
-	//fonction "unit circle" d'ajustement du sens de x_step ?
-
-	//recherche d'intersection avec un mur
-	while (wall_hit(h_x, h_y - pixel, data))
+	data->ray.r_angle = normalize_angle(data->ray.r_angle);
+	if (data->ray.r_angle == 0 || data->ray.r_angle == PI)
+		return (0);
+	h_y = get_first_step(data, 'H');
+	h_x = (h_y - data->player.p_y) / tan(data->ray.r_angle) + data->player.p_x;
+	inter_y = get_inter(data, 'H');
+	inter_x = inter_y / tan(data->ray.r_angle);
+	while (hit_wall(data, h_x, h_y, 'H') == 1)
 	{
-		h_x += x_step;
-		h_y += y_step;
+		h_x += inter_x;
+		h_y += inter_y;
 	}
-
-	//application de pythagore pour retourner la distance
+	data->ray.horiz_x = h_x;
+	data->ray.horiz_y = h_y;
 	return (sqrt(pow(h_x - data->player.p_x, 2) + pow(h_y - data->player.p_y, 2)));
 }
 
-//prototype fonction raycasting
+double	get_vertical_distance(t_data *data)
+{
+	double v_x;
+	double v_y;
+	double inter_x;
+	double inter_y;
+
+	data->ray.r_angle = normalize_angle(data->ray.r_angle);
+	if (data->ray.r_angle == P2 || data->ray.r_angle == P3)
+		return (0);
+	v_x = get_first_step(data, 'V');
+	v_y = (v_x - data->player.p_x) * tan(data->ray.r_angle) + data->player.p_y;
+	inter_x = get_inter(data, 'V');
+	inter_y = inter_x * tan(data->ray.r_angle);
+	while (hit_wall(data, v_x, v_y, 'V') == 1)
+	{
+		v_x += inter_x;
+		v_y += inter_y;
+	}
+	data->ray.vert_x = v_x;
+	data->ray.vert_y = v_y;
+	return (sqrt(pow(v_x - data->player.p_x, 2) + pow(v_y - data->player.p_y, 2)));
+}
+
+void	get_shorter_distance(t_data *data)
+{
+	double	h_distance;
+	double	v_distance;
+
+	h_distance = get_horizontal_distance(data);
+	v_distance = get_vertical_distance(data);
+	if (h_distance <= v_distance)
+	{
+		data->ray.r_distance = h_distance;
+		data->ray.flag = 1;
+	}
+	else if (v_distance < h_distance)
+	{
+		data->ray.r_distance = v_distance;
+		data->ray.flag = 0;
+	}
+}
+
 void	raycasting(t_data *data)
 {
-	double	v_inter;
-	double	h_inter;
+
 	int		ray;
 
 	ray = 0;
-
-	//calcul de l'angle de depart
 	data->ray.r_angle = data->player.p_angle - (data->player.fov_rad / 2);
-
-	//boucle pour caster chaque rayon
-	while (ray < data->width)
+	data->img_screen.img = mlx_new_image(data->mlx, SCR_WIDTH, SCR_HEIGHT);
+	data->img_screen.addr = mlx_get_data_addr(data->img_screen.img, &data->img_screen.bits_per_pixel,
+					&data->img_screen.line_length, &data->img_screen.endian);
+	while(ray < SCR_WIDTH)
 	{
-		h_inter = get_h_inter(data);
-		v_inter = get_v_inter(data);
-
-		if (v_inter <= h_inter)
-			data->ray.r_distance = v_inter;
-		else
-			data->ray.r_distance = h_inter;
-
-		display_wall(data);
+		get_shorter_distance(data);
+		display_wall(data, ray);
 		ray++;
-
-		//passage au prochain angle
-		data->ray.r_angle += (data->player.fov_rad / data->width);
+		data->ray.r_angle += data->player.fov_rad / SCR_WIDTH;
 	}
-}*/
+	mlx_put_image_to_window(data->mlx, data->win, data->img_screen.img, 0, 0);
+}

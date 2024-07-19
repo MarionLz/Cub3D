@@ -24,3 +24,9 @@ int	key_release(int keycode)
 		close_win();
 	return (0);
 }
+
+int    close_win(void)
+{
+	exit (0);
+	return (1);
+}

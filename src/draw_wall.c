@@ -65,7 +65,6 @@ void	draw_floor_and_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
 	i = bottom_pix;
 	while (i < SCR_HEIGHT)
 	{
-
 		my_mlx_pixel_put(&data->img_screen, ray, i, data->floor_color);
 		i++;
 	}
@@ -82,17 +81,11 @@ void	display_wall(t_data *data, int ray)
 	int		bottom_pix;
 	int		top_pix;
 
-	//correction effet fisheye
 	data->ray.r_distance *= cos(normalize_angle(data->ray.r_angle - data->player.p_angle));
-
-	//calcul hauteur en pixel du mur a afficher
 	data->wall_height = (TILE_SIZE / data->ray.r_distance) *
 				((SCR_WIDTH / 2) / tan(data->player.fov_rad / 2));
-
-	//calcul de la position du top pixel et du bottom pixel
 	bottom_pix = (SCR_HEIGHT / 2) + (data->wall_height / 2);
 	top_pix = (SCR_HEIGHT /2) - (data->wall_height / 2);
-
 	if (bottom_pix > SCR_HEIGHT)
 		bottom_pix = SCR_HEIGHT;
 	if (top_pix < 0)

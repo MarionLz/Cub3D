@@ -25,11 +25,11 @@
 # define BACK			115
 # define RIGHT			100
 //azerty :
-//# define FORWARD		122
-//# define LEFT			113
+# define FORWARD		122
+# define LEFT			113
 //qwerty :
-# define FORWARD		119
-# define LEFT			97
+//# define FORWARD		119
+//# define LEFT			97
 
 typedef struct s_img
 {
@@ -55,15 +55,11 @@ typedef struct s_texture
 typedef struct s_ray
 {
 	double	r_distance;
-	//double	r_x;
-	//double	r_y;
 	double	r_angle;
 	double	horiz_x;
 	double	horiz_y;
-	int		horiz_dir;
 	double	vert_x;
 	double	vert_y;
-	int		vert_dir;
 	int		flag;
 }	t_ray;
 
@@ -84,10 +80,7 @@ typedef struct  s_data
 	void		*win;
 	char		**map;
 	int			fd;
-	int			nb_colomn;
 	int			nb_rows;
-	int			width_square;
-	int			height_square;
 	int			no;
 	int			so;
 	int			we;
@@ -96,12 +89,6 @@ typedef struct  s_data
 	int			c_count;
 	double		wall_height;
 	int			wall[4][TILE_SIZE * TILE_SIZE];
-	t_img		img_player;
-	t_img		img_wall;
-	t_img		img_floor;
-	t_img		img_compass;
-	t_img		img_background;
-	t_img		img_dot;
 	t_img		img_screen;
 	t_player	player;
 	t_texture	texture[4];
@@ -158,6 +145,9 @@ void	parse_map(char *line, t_data *data);
 
 /* RAY */
 double	normalize_angle(double angle);
+void	raycasting(t_data *data);
+double	get_first_step(t_data *data, char dir);
+double	get_inter(t_data *data, char dir);
 
 /* DRAW WALL */
 void	display_wall(t_data *data, int ray);

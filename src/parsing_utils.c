@@ -53,3 +53,29 @@ void	load_path(t_data *data, char *line, int i, int *dir)
 	if (!data->texture[i].path)
 		display_error("a path to texture's file must be provided\n");
 }
+
+void	init_p_angle(t_data *data, char dir)
+{
+	if (dir == 'N')
+		data->player.p_angle = P3;
+	if (dir == 'S')
+		data->player.p_angle = P2;
+	if (dir == 'E')
+		data->player.p_angle = 0;
+	if (dir == 'W')
+		data->player.p_angle = PI;
+}
+
+int	init_player(t_data *data, int x, int y, int count_player)
+{
+	if (count_player > 0)
+		error_map(data, "Map : more than 1 player have been found.");
+	data->player.map_x = x;
+	data->player.map_y = y;
+	data->player.p_x = x * TILE_SIZE + TILE_SIZE / 2;
+	data->player.p_y = y * TILE_SIZE + TILE_SIZE / 2;
+	data->player.p_speed = 10;
+	data->player.fov_rad = (FOV * PI / 180);
+	init_p_angle(data, data->map[y][x]);
+	return (1);
+}

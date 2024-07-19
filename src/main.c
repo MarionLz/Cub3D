@@ -1,5 +1,27 @@
 #include "../include/cub3D.h"
 
+void	init_data(t_data *data)
+{
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, SCR_WIDTH, SCR_HEIGHT, "WELCOME TO THE AWKWARD / CREEPY MUSEUM");
+	if (!data->win)
+	{
+		free(data->mlx);
+		exit (1);
+	}
+	data->text_y = 0;
+	data->text_x = 0;
+	data->delta_angle = 0.1;
+	data->ray.flag = 0;
+	data->color = 0;
+	data->no = 0;
+	data->so = 0;
+	data->we = 0;
+	data->ea = 0;
+	data->c_count = 0;
+	data->f_count = 0;
+}
+
 int	check_arguments(int ac, char **av)
 {
 	char	*file_extension;
@@ -22,11 +44,9 @@ int	main(int ac, char **av)
 	init_data(&data);
 	parse_file(av, &data);
 	init_textures(&data);
-	//create_images(&data);
-	//print_map(&data);
-	init_ray(&data);
-	mlx_hook(data.win, 02, 1L<<0, &key_press, &data); //key_press : move the player
-	mlx_hook(data.win, 03, 1L<<1, &key_release, 0); //key_release : close the window with ESC
-	mlx_hook(data.win, 17, 0, &close_win, &data); // close the window with the red cross
+	raycasting(&data);
+	mlx_hook(data.win, 02, 1L<<0, &key_press, &data);
+	mlx_hook(data.win, 03, 1L<<1, &key_release, 0);
+	mlx_hook(data.win, 17, 0, &close_win, &data);
 	mlx_loop(data.mlx);
 }

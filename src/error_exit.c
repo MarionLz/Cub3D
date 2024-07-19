@@ -10,7 +10,7 @@ void	error_map(t_data *data, char *error_msg)
 {
 	display_error(error_msg);
 	close(data->fd);
-	free_map(data->map);
+	free_tab(data->map);
 	exit(1);
 }
 
@@ -28,22 +28,4 @@ void	check_counts(t_data *data)
 		display_error(".cub file must have only one path per direction");
 	if (data->c_count > 1 || data->f_count > 1)
 		display_error(".cub file must have only one color for the floor or the ceiling");
-}
-void    free_map(char **map)
-{
-    int i;
-
-    i = 0;
-    while (map[i])
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
-}
-
-int    close_win(void)
-{
-	exit (0);
-	return (1);
 }

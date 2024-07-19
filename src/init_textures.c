@@ -1,55 +1,5 @@
 #include "../include/cub3D.h"
 
-
-void	init_p_angle(t_data *data, char dir)
-{
-	if (dir == 'N')
-		data->player.p_angle = P3;
-	if (dir == 'S')
-		data->player.p_angle = P2;
-	if (dir == 'E')
-		data->player.p_angle = 0;
-	if (dir == 'W')
-		data->player.p_angle = PI;
-}
-
-int	init_player(t_data *data, int x, int y, int count_player)
-{
-	if (count_player > 0)
-		error_map(data, "Map : more than 1 player have been found.");
-	data->player.map_x = x;
-	data->player.map_y = y;
-	data->player.p_x = x * TILE_SIZE + TILE_SIZE / 2;
-	data->player.p_y = y * TILE_SIZE + TILE_SIZE / 2;
-	data->player.p_speed = 10;
-	data->player.fov_rad = (FOV * PI / 180);
-	init_p_angle(data, data->map[y][x]);
-	return (1);
-}
-
-void	init_data(t_data *data)
-{
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, SCR_WIDTH, SCR_HEIGHT, "WELCOME TO CUB3D");
-	if (!data->win)
-	{
-		free(data->mlx);
-		//return (1);
-	}
-	data->nb_colomn = 10;
-	data->text_y = 0;
-	data->text_x = 0;
-	data->delta_angle = 0.1;
-	data->ray.flag = 0;
-	data->color = 0;
-	data->no = 0;
-	data->so = 0;
-	data->we = 0;
-	data->ea = 0;
-	data->c_count = 0;
-	data->f_count = 0;
-}
-
 void	init_texture_data(t_data *data)
 {
 	int	i;
