@@ -1,6 +1,6 @@
 #include "../include/cub3D.h"
 
-void	check_floor_ceiling_format(char **colors)
+void	check_floor_ceiling_format(char **colors, t_data *data, char *line)
 {
 	int	i;
 	int	j;
@@ -12,15 +12,21 @@ void	check_floor_ceiling_format(char **colors)
 		while (colors[i][j])
 		{
 			if (!ft_isdigit(colors[i][j]) && colors[i][j] != '\n')
-				display_error("colors components must be 3 digits set between\
- 0 and 255, separated by a ',' without space");
+			{
+				free_tab(colors);
+				error_textures(data, "colors components must be 3 digits set between\
+ 0 and 255, separated by a ',' without space", line);
+			}
 			j++;
 		}
 		i++;
 	}
 	if (i != 3)
-		display_error("colors components must be 3 digits set between 0 and 255,\
- separated by a ',' without space");
+	{
+		free_tab(colors);
+		error_textures(data, "colors components must be 3 digits set between 0 and 255,\
+ separated by a ',' without space", line);
+	}
 }
 
 char	*get_path(const char *s)
@@ -48,14 +54,13 @@ char	*get_path(const char *s)
 
 void	load_path(t_data *data, char *line, int i, int *dir)
 {
-	check_counts(data, line, i);
-	data->texture[i].path = get_path(&line[3]);
+	if (data->p_count < 4) 
+		data->p_count += 1;
 	*dir += 1;
+	check_counts(data, line);
+	data->texture[i].path = get_path(&line[3]);
 	if (!data->texture[i].path)
-	{
-		free_paths(data, i);
-		display_error("a path to texture's file must be provided\n");
-	}
+		error_textures(data, "a path to texture's file must be provided\n", line);
 }
 
 void	init_p_angle(t_data *data, char dir)

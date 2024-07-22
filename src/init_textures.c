@@ -33,6 +33,9 @@ void	*convert_img(t_data *data, char *path, int i)
 		else if (i == 3)
 			txt = "EA";
 		printf("error\npath to texture %s is invalid\n", txt);
+		free_tab(data->map);
+		free_paths(data);
+		free_mlx(data);
 		exit (1);
 	}
 	return (img);

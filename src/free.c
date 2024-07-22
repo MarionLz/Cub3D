@@ -15,15 +15,15 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	free_paths(t_data *data, int i)
+void	free_paths(t_data *data)
 {
-	int	j;
+	int	i;
 
-	j = 0;
-	while (j < i)
+	i = 0;
+	while (i < data->p_count)
 	{
-		free(data->texture[j].path);
-		j++;
+		free(data->texture[i].path);
+		i++;
 	}
 	return ;
 }
@@ -31,8 +31,9 @@ void	free_paths(t_data *data, int i)
 void	free_all(t_data *data)
 {
 	free_tab(data->map);
-	free_paths(data, 4);
+	free_paths(data);
 	mlx_destroy_image(data->mlx, data->img_screen.img);
+	free_mlx(data);
 }
 
 void	free_mlx(t_data *data)

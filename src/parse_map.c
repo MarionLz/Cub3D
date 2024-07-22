@@ -64,18 +64,16 @@ void	parse_map(char *line, t_data *data)
 
 	map_str = ft_strdup(line);
 	data->nb_rows++;
+	free(line);
 	while (1)
 	{
-		line = get_next_line(data->fd);
+		line = get_next_line(data->fd, data);
 		if (!line)
 			break;
 		if (empty_line(line) == true)
 		{
-			free(line);
 			free(map_str);
-			close(data->fd);
-			free_mlx(data);
-			display_error("Map : empty line.");
+			error_textures(data, "Map : empty line", line);
 		}
 		map_str = ft_strjoin_and_free(map_str, line);
         free(line);
