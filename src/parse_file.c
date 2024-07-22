@@ -12,42 +12,55 @@ void	parse_textures(char *line, t_data *data)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		load_path(data, line, 3, &data->ea);
 	else
+	{
+		free(line);
+		free_mlx(data);
 		display_error("path must be separated of the direction with a space");
+	}
 }
 
+void	convert_color(t_data *data, char **colors, char *line, int flag)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_atoi(colors[0]);
+	g = ft_atoi(colors[1]);
+	b = ft_atoi(colors[2]);
+	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
+	{
+		free(line);
+		free_mlx(data);
+		display_error("colors components must be 3 digits set between 0 and 255,\
+ separated by a ',' without space");
+	}
+	if (flag == 0)
+	{
+		data->floor_color = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+		data->f_count += 1;
+	}
+	else if (flag == 1)
+	{
+		data->ceiling_color = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+		data->c_count += 1;
+	}
+}
 
 void	parse_floor_and_ceiling(char *line, t_data *data)
 {
 	char	**colors;
 	int		i;
-	int		r;
-	int		g;
-	int		b;
-	unsigned long tmp;
 
 	i = 0; 
 	while((line[i] == 'C' || line[i] == 'F' || line[i] == ' ') && line[i])
 		i++;
 	colors = ft_split(&line[i], ',');
 	check_floor_ceiling_format(colors);
-	r = ft_atoi(colors[0]);
-	g = ft_atoi(colors[1]);
-	b = ft_atoi(colors[2]);
-	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
-		display_error("colors components must be 3 digits set between 0 and 255,\
-	 separated by a ',' without space");
 	if (ft_strncmp(line, "F", 1) == 0)
-	{
-		tmp = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-		data->floor_color = tmp;
-		data->f_count += 1;
-	}
+		convert_color(data, colors, line, 0);
 	else if (ft_strncmp(line, "C", 1) == 0)
-	{
-		tmp = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-		data->ceiling_color = tmp;
-		data->c_count += 1;
-	}
+		convert_color(data, colors, line, 1);
 	free_tab(colors);
 }
 
@@ -67,7 +80,7 @@ int	is_map(char *str)
 
 int	parse_blocs(char *line, t_data *data, int file_blocs)
 {
-	check_counts(data);
+	check_counts(data, line);
 	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO ", 2) == 0
 		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA ", 2) == 0)
 	{
@@ -81,7 +94,7 @@ int	parse_blocs(char *line, t_data *data, int file_blocs)
 	}
 	else if (is_map(line) == 1)
 	{
-		if (file_blocs < 2)
+		if (file_blocs < 6)
 			error_file(data, line, "File : map description must be at the end of the file");
 		parse_map(line, data);
 		return (file_blocs += 1);
@@ -101,7 +114,10 @@ void	parse_file(char **av, t_data *data)
 	file_blocs = 0;
 	data->fd = open(av[1], O_RDONLY);
 	if (data->fd < 0)
+	{
+		free_mlx(data);
 		display_error("File : failed to open file.");
+	}
 	while (1)
 	{
 		line = get_next_line(data->fd);
@@ -112,6 +128,7 @@ void	parse_file(char **av, t_data *data)
 			break;
 		free(line);
 	}
+	free(line);
 	close(data->fd);
 	if (file_blocs < 3)
 		display_error("File : no map found.");

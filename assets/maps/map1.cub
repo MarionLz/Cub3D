@@ -1,7 +1,8 @@
-NO ./assets/textures/fox.xpm        
+NO ./assets/textures/fox.xpm 
 SO ./assets/textures/owl.xpm
 WE ./assets/textures/wolf.xpm
 EA ./assets/textures/squirrel.xpm
+NO ./assets/textures/fox.xpm
 
 F 192,192,192
 C 129,129,129

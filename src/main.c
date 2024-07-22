@@ -9,6 +9,7 @@ void	init_data(t_data *data)
 		free(data->mlx);
 		exit (1);
 	}
+	data->nb_rows = 0;
 	data->text_y = 0;
 	data->text_x = 0;
 	data->delta_angle = 0.1;
@@ -46,7 +47,7 @@ int	main(int ac, char **av)
 	init_textures(&data);
 	raycasting(&data);
 	mlx_hook(data.win, 02, 1L<<0, &key_press, &data);
-	mlx_hook(data.win, 03, 1L<<1, &key_release, 0);
+	mlx_hook(data.win, 03, 1L<<1, &key_release, &data);
 	mlx_hook(data.win, 17, 0, &close_win, &data);
 	mlx_loop(data.mlx);
 }

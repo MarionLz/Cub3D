@@ -14,6 +14,7 @@ void	rotate(t_data *data, int direction)
 		if (data->player.p_angle < 0)
 			data->player.p_angle += (2 * PI);
 	}
+	mlx_destroy_image(data->mlx, data->img_screen.img);
 	raycasting(data);
 }
 
@@ -29,6 +30,7 @@ void    move_forward_back(t_data *data, int dir)
 		data->player.p_x = new_x;
 		data->player.p_y = new_y;
 	}
+	mlx_destroy_image(data->mlx, data->img_screen.img);
 	raycasting(data);
 }
 
@@ -44,5 +46,6 @@ void	move_left_right(t_data *data, int dir)
 		data->player.p_x = new_x;
 		data->player.p_y = new_y;
 	}
+	mlx_destroy_image(data->mlx, data->img_screen.img);
 	raycasting(data);
 }

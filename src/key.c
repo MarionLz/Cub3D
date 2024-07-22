@@ -17,16 +17,20 @@ int	key_press(int keycode, t_data *data)
     return (0);
 }
 
-int	key_release(int keycode)
+int	key_release(int keycode, t_data *data)
 {
 	// esc
 	if (keycode == 65307)
-		close_win();
+		close_win(data);
 	return (0);
 }
 
-int    close_win(void)
+int    close_win(t_data *data)
 {
+	free_all(data);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit (0);
 	return (1);
 }

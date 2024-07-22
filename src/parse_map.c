@@ -71,11 +71,11 @@ void	parse_map(char *line, t_data *data)
 			break;
 		if (empty_line(line) == true)
 		{
-			display_error("Map : empty line.");
 			free(line);
 			free(map_str);
 			close(data->fd);
-			exit(1);
+			free_mlx(data);
+			display_error("Map : empty line.");
 		}
 		map_str = ft_strjoin_and_free(map_str, line);
         free(line);
