@@ -25,11 +25,11 @@
 # define BACK			115
 # define RIGHT			100
 //azerty :
-# define FORWARD		122
-# define LEFT			113
+//# define FORWARD		122
+//# define LEFT			113
 //qwerty :
-//# define FORWARD		119
-//# define LEFT			97
+# define FORWARD		119
+# define LEFT			97
 
 typedef struct s_img
 {
@@ -85,6 +85,7 @@ typedef struct  s_data
 	int			so;
 	int			we;
 	int			ea;
+	int			p_count;
 	int			f_count;
 	int			c_count;
 	double		wall_height;
@@ -130,11 +131,11 @@ int		display_error(char *error_msg);
 void	error_map(t_data *data, char *error_msg);
 void	error_file(t_data *data, char *line, char *error_msg);
 void	free_map(char **map);
-int		close_win(void);
-void	check_counts(t_data *data);
+int		close_win(t_data *data);
+void	check_counts(t_data *data, char *line);
 
 int		key_press(int keycode, t_data *data);
-int		key_release(int keycode);
+int		key_release(int keycode, t_data *data);
 
 /* PARSE FILE */
 int		is_map(char *str);
@@ -162,5 +163,8 @@ void	load_path(t_data *data, char *line, int i, int *dir);
 
 /* FREE */
 void	free_tab(char **tab);
+void	free_all(t_data *data);
+void	free_paths(t_data *data, int i);
+void	free_mlx(t_data *data);
 
 # endif
