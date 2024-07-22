@@ -21,6 +21,8 @@ void	init_data(t_data *data)
 	data->ea = 0;
 	data->c_count = 0;
 	data->f_count = 0;
+	data->p_count = 0;
+	data->stash = ft_strdup("");
 }
 
 int	check_arguments(int ac, char **av)
@@ -50,4 +52,5 @@ int	main(int ac, char **av)
 	mlx_hook(data.win, 03, 1L<<1, &key_release, &data);
 	mlx_hook(data.win, 17, 0, &close_win, &data);
 	mlx_loop(data.mlx);
+	free_all(&data);
 }

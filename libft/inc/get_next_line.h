@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maax <maax@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gdaignea <gdaignea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:11:49 by malauzie          #+#    #+#             */
-/*   Updated: 2024/01/31 11:30:19 by maax             ###   ########.fr       */
+/*   Updated: 2024/07/22 15:44:57 by gdaignea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+/* #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
 # include <fcntl.h>
@@ -31,4 +31,4 @@ char			*ft_strdup(const char *s);
 size_t			ft_strlen(const char *s);
 unsigned int	str_chr(const char *s, int c);
 
-#endif
+#endif */

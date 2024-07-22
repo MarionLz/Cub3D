@@ -16,6 +16,7 @@
 #define FOV	60
 #define P2 PI/2
 #define P3 3*PI/2
+#define BUFFER_SIZE 42
 
 # define TILE_SIZE 64
 # define SCR_WIDTH 1900
@@ -96,12 +97,14 @@ typedef struct  s_data
 	double		delta_angle;
 	int			text_y;
 	int			text_x;
+	char		*stash;
 	unsigned int	color;
 	unsigned long	floor_color;
 	unsigned long	ceiling_color;
 	t_ray		ray;
 }	t_data;
 
+char	*get_next_line(int fd, t_data *data);
 int		check_arguments(int ac, char **av);
 
 /* INIT */
@@ -133,6 +136,8 @@ void	error_file(t_data *data, char *line, char *error_msg);
 void	free_map(char **map);
 int		close_win(t_data *data);
 void	check_counts(t_data *data, char *line);
+void	error_textures(t_data *data, char *error_msg, char *line);
+void	error_no_map(t_data *data, char *error_msg);
 
 int		key_press(int keycode, t_data *data);
 int		key_release(int keycode, t_data *data);
@@ -157,14 +162,14 @@ void	display_wall(t_data *data, int ray);
 void	init_textures(t_data *data);
 
 /* UTILS */
-void	check_floor_ceiling_format(char **colors);
+void	check_floor_ceiling_format(char **colors, t_data *data, char *line);
 char	*get_path(const char *s);
 void	load_path(t_data *data, char *line, int i, int *dir);
 
 /* FREE */
 void	free_tab(char **tab);
 void	free_all(t_data *data);
-void	free_paths(t_data *data, int i);
+void	free_paths(t_data *data);
 void	free_mlx(t_data *data);
 
 # endif

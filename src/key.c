@@ -28,9 +28,6 @@ int	key_release(int keycode, t_data *data)
 int    close_win(t_data *data)
 {
 	free_all(data);
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
 	exit (0);
 	return (1);
 }
