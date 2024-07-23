@@ -2,7 +2,7 @@
 
 bool	empty_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strlen(line) == 1)
@@ -20,22 +20,36 @@ bool	closed_map(t_data *data, int x, int y)
 		return (false);
 	if (y == data->nb_rows - 1 || x == ((int)ft_strlen(data->map[y]) - 1))
 		return (false);
-	if (data->map[y][x-1] == ' ' || data->map[y][x+1] == ' ')
+	if (data->map[y][x - 1] == ' ' || data->map[y][x + 1] == ' ')
 		return (false);
-	if (data->map[y-1][x] == ' ' || data->map[y+1][x] == ' ')
+	if (data->map[y - 1][x] == ' ' || data->map[y + 1][x] == ' ')
 		return (false);
-	if (data->map[y-1][x-1] == ' ' || data->map[y+1][x-1] == ' ')
+	if (data->map[y - 1][x - 1] == ' ' || data->map[y + 1][x - 1] == ' ')
 		return (false);
-	if (data->map[y-1][x+1] == ' ' || data->map[y+1][x+1] == ' ')
+	if (data->map[y - 1][x + 1] == ' ' || data->map[y + 1][x + 1] == ' ')
 		return (false);
 	return (true);
+}
+
+int	is_map(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '\n')
+		return (0);
+	while (str[i] == ' ')
+		i++;
+	if (ft_strchr("01NSEW", str[i]))
+		return (1);
+	return (0);
 }
 
 void	check_map(t_data *data)
 {
 	int	x;
-	int y;
-	int count_player;
+	int	y;
+	int	count_player;
 
 	y = 0;
 	count_player = 0;
@@ -45,7 +59,8 @@ void	check_map(t_data *data)
 		while (data->map[y][x])
 		{
 			if (!ft_strchr("01NSEW ", data->map[y][x]))
-				error_map(data, "Map : invalid character detected. Allowed characters are : 01NSEW and space.");
+				error_map(data, "Map : invalid character detected. Allowed characters\
+		 are : 01NSEW and space.");
 			if (data->map[y][x] == '0' && closed_map(data, x, y) == false)
 				error_map(data, "Map : map is not closed.");
 			if (ft_strchr("NSEW", data->map[y][x]))
@@ -60,7 +75,7 @@ void	check_map(t_data *data)
 
 void	parse_map(char *line, t_data *data)
 {
-	char *map_str;
+	char	*map_str;
 
 	map_str = ft_strdup(line);
 	data->nb_rows++;
@@ -69,14 +84,14 @@ void	parse_map(char *line, t_data *data)
 	{
 		line = get_next_line(data->fd, data);
 		if (!line)
-			break;
+			break ;
 		if (empty_line(line) == true)
 		{
 			free(map_str);
 			error_textures(data, "Map : empty line", line);
 		}
 		map_str = ft_strjoin_and_free(map_str, line);
-        free(line);
+		free(line);
 		data->nb_rows++;
 	}
 	data->map = ft_split(map_str, '\n');

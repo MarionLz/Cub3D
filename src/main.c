@@ -3,7 +3,8 @@
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, SCR_WIDTH, SCR_HEIGHT, "WELCOME TO THE AWKWARD / CREEPY MUSEUM");
+	data->win = mlx_new_window(data->mlx, SCR_WIDTH, SCR_HEIGHT,
+			"WELCOME TO THE AWKWARD / CREEPY MUSEUM");
 	if (!data->win)
 	{
 		free(data->mlx);
@@ -34,7 +35,8 @@ int	check_arguments(int ac, char **av)
 	if (ac > 2)
 		display_error("A single .cub file is required.");
 	file_extension = ft_strrchr(av[1], '.');
-	if (ft_strncmp(file_extension, ".cub", 4) != 0 || ft_strlen(file_extension) != ft_strlen(".cub"))
+	if (ft_strncmp(file_extension, ".cub", 4) != 0
+		|| ft_strlen(file_extension) != ft_strlen(".cub"))
 		display_error("Correct file extension is .cub.");
 	return (0);
 }
@@ -48,8 +50,8 @@ int	main(int ac, char **av)
 	parse_file(av, &data);
 	init_textures(&data);
 	raycasting(&data);
-	mlx_hook(data.win, 02, 1L<<0, &key_press, &data);
-	mlx_hook(data.win, 03, 1L<<1, &key_release, &data);
+	mlx_hook(data.win, 02, 1L << 0, &key_press, &data);
+	mlx_hook(data.win, 03, 1L << 1, &key_release, &data);
 	mlx_hook(data.win, 17, 0, &close_win, &data);
 	mlx_loop(data.mlx);
 	free_all(&data);

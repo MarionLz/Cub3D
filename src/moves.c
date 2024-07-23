@@ -18,13 +18,15 @@ void	rotate(t_data *data, int direction)
 	raycasting(data);
 }
 
-void    move_forward_back(t_data *data, int dir)
+void	move_forward_back(t_data *data, int dir)
 {
 	int	new_x;
 	int	new_y;
 
-	new_x = data->player.p_x + floorf(data->player.p_speed * cos(data->player.p_angle))* dir;
-    new_y = data->player.p_y + floorf(data->player.p_speed * sin(data->player.p_angle))* dir;
+	new_x = data->player.p_x + floorf(data->player.p_speed
+			* cos(data->player.p_angle)) * dir;
+	new_y = data->player.p_y + floorf(data->player.p_speed
+			* sin(data->player.p_angle)) * dir;
 	if (data->map[new_y / TILE_SIZE][new_x / TILE_SIZE] != '1')
 	{
 		data->player.p_x = new_x;
@@ -38,9 +40,11 @@ void	move_left_right(t_data *data, int dir)
 {
 	int	new_x;
 	int	new_y;
-	
-	new_x = data->player.p_x + floorf(data->player.p_speed * cos(data->player.p_angle + dir * P2));
-    new_y = data->player.p_y + floorf(data->player.p_speed * sin(data->player.p_angle + dir * P2));
+
+	new_x = data->player.p_x + floorf(data->player.p_speed
+			* cos(data->player.p_angle + dir * P2));
+	new_y = data->player.p_y + floorf(data->player.p_speed
+			* sin(data->player.p_angle + dir * P2));
 	if (data->map[new_y / TILE_SIZE][new_x / TILE_SIZE] != '1')
 	{
 		data->player.p_x = new_x;
