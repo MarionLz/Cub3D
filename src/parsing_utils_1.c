@@ -54,13 +54,14 @@ char	*get_path(const char *s)
 
 void	load_path(t_data *data, char *line, int i, int *dir)
 {
-	if (data->p_count < 4) 
+	if (data->p_count < 4)
 		data->p_count += 1;
 	*dir += 1;
 	check_counts(data, line);
 	data->texture[i].path = get_path(&line[3]);
 	if (!data->texture[i].path)
-		error_textures(data, "a path to texture's file must be provided\n", line);
+		error_textures(data, "a path to texture's file must be provided\n",
+			line);
 }
 
 void	init_p_angle(t_data *data, char dir)

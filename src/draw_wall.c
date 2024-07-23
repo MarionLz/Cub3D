@@ -49,7 +49,8 @@ void	draw_wall(t_data *data, int top_pix, int bottom_pix, int ray)
 	while (top_pix < bottom_pix)
 	{
 		data->text_y = pos_y;
-		data->color = data->wall[text_nb][TILE_SIZE * data->text_y + data->text_x];
+		data->color = data->wall[text_nb][TILE_SIZE * data->text_y
+			+ data->text_x];
 		pos_y += step;
 		if (data->ray.flag == 0)
 			data->color = (data->color >> 1) & 8355711;
@@ -58,7 +59,7 @@ void	draw_wall(t_data *data, int top_pix, int bottom_pix, int ray)
 	}
 }
 
-void	draw_floor_and_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
+void	draw_floor_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
 {
 	int	i;
 
@@ -81,15 +82,16 @@ void	display_wall(t_data *data, int ray)
 	int		bottom_pix;
 	int		top_pix;
 
-	data->ray.r_distance *= cos(normalize_angle(data->ray.r_angle - data->player.p_angle));
-	data->wall_height = (TILE_SIZE / data->ray.r_distance) *
-				((SCR_WIDTH / 2) / tan(data->player.fov_rad / 2));
+	data->ray.r_distance *= cos(normalize_angle(data->ray.r_angle
+				- data->player.p_angle));
+	data->wall_height = (TILE_SIZE / data->ray.r_distance)
+		* ((SCR_WIDTH / 2) / tan(data->player.fov_rad / 2));
 	bottom_pix = (SCR_HEIGHT / 2) + (data->wall_height / 2);
-	top_pix = (SCR_HEIGHT /2) - (data->wall_height / 2);
+	top_pix = (SCR_HEIGHT / 2) - (data->wall_height / 2);
 	if (bottom_pix > SCR_HEIGHT)
 		bottom_pix = SCR_HEIGHT;
 	if (top_pix < 0)
 		top_pix = 0;
 	draw_wall(data, top_pix, bottom_pix, ray);
-	draw_floor_and_ceiling(data, ray, bottom_pix, top_pix);
+	draw_floor_ceiling(data, ray, bottom_pix, top_pix);
 }

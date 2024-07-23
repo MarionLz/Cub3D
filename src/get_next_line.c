@@ -1,4 +1,3 @@
-
 #include "../include/cub3D.h"
 
 char	*clean_stash(t_data *data, unsigned int i)
@@ -100,4 +99,3 @@ char	*get_next_line(int fd, t_data *data)
 	data->stash = clean_stash(data, i);
 	return (line);
 }
-

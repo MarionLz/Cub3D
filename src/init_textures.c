@@ -43,7 +43,7 @@ void	*convert_img(t_data *data, char *path, int i)
 
 char	*get_data_address(t_texture *texture)
 {
-	char *address;
+	char	*address;
 
 	address = mlx_get_data_addr(texture->img, &(texture->bits_per_pixel),
 			&(texture->line_length), &(texture->endian));

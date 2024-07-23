@@ -1,6 +1,6 @@
 #include "../include/cub3D.h"
 
-double normalize_angle(double angle)
+double	normalize_angle(double angle)
 {
 	if (angle < 0)
 		angle += (2 * PI);
@@ -35,7 +35,7 @@ double	get_inter(t_data *data, char dir)
 		if (data->ray.r_angle < PI)
 			return (TILE_SIZE);
 		if (data->ray.r_angle > PI)
-			return (- TILE_SIZE);	
+			return (-TILE_SIZE);
 	}
 	if (dir == 'V')
 	{

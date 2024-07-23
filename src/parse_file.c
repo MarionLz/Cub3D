@@ -1,4 +1,4 @@
-# include "../include/cub3D.h"
+#include "../include/cub3D.h"
 
 // 0 = NO ; 1 = SO; 2 = WE ; 3 = EA
 void	parse_textures(char *line, t_data *data)
@@ -42,7 +42,8 @@ void	convert_color(t_data *data, char **colors, char *line, int flag)
 	}
 	else if (flag == 1)
 	{
-		data->ceiling_color = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+		data->ceiling_color = ((r & 0xff) << 16) + ((g & 0xff) << 8)
+			+ (b & 0xff);
 		data->c_count += 1;
 	}
 	check_counts(data, line);
@@ -53,8 +54,8 @@ void	parse_floor_and_ceiling(char *line, t_data *data)
 	char	**colors;
 	int		i;
 
-	i = 0; 
-	while((line[i] == 'C' || line[i] == 'F' || line[i] == ' ') && line[i])
+	i = 0;
+	while ((line[i] == 'C' || line[i] == 'F' || line[i] == ' ') && line[i])
 		i++;
 	colors = ft_split(&line[i], ',');
 	check_floor_ceiling_format(colors, data, line);
@@ -63,20 +64,6 @@ void	parse_floor_and_ceiling(char *line, t_data *data)
 	else if (ft_strncmp(line, "C", 1) == 0)
 		convert_color(data, colors, line, 1);
 	free_tab(colors);
-}
-
-int	is_map(char *str)
-{
-	int i;
-
-	i = 0;
-	if (str[i] == '\n')
-		return (0);
-	while (str[i] == ' ')
-		i++;
-	if (ft_strchr("01NSEW", str[i]))
-		return (1);
-	return (0);
 }
 
 int	parse_blocs(char *line, t_data *data, int file_blocs)
@@ -106,8 +93,8 @@ int	parse_blocs(char *line, t_data *data, int file_blocs)
 
 void	parse_file(char **av, t_data *data)
 {
-	char *line;
-	int	file_blocs;
+	char	*line;
+	int		file_blocs;
 
 	file_blocs = 0;
 	data->fd = open(av[1], O_RDONLY);
@@ -124,7 +111,7 @@ void	parse_file(char **av, t_data *data)
 			break ;
 		file_blocs = parse_blocs(line, data, file_blocs);
 		if (file_blocs > 6)
-			break;
+			break ;
 		free(line);
 	}
 	close(data->fd);
