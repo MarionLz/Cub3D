@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 14:32:57 by malauzie          #+#    #+#             */
+/*   Updated: 2024/07/23 15:32:40 by malauzie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 int	hit_wall(t_data *data, double x, double y, char flag)
@@ -6,7 +18,8 @@ int	hit_wall(t_data *data, double x, double y, char flag)
 	int	map_y;
 
 	map_x = x / TILE_SIZE;
-	if (flag == 'V' && data->ray.r_angle > P2 && data->ray.r_angle < P3)
+	if (flag == 'V' && data->ray.r_angle > PI / 2
+		&& data->ray.r_angle < 3 * PI / 2)
 		map_x = x / TILE_SIZE - 1;
 	map_y = y / TILE_SIZE;
 	if (flag == 'H' && data->ray.r_angle > PI)
@@ -52,7 +65,7 @@ double	get_vertical_distance(t_data *data)
 	double	inter_y;
 
 	data->ray.r_angle = normalize_angle(data->ray.r_angle);
-	if (data->ray.r_angle == P2 || data->ray.r_angle == P3)
+	if (data->ray.r_angle == PI / 2 || data->ray.r_angle == 3 * PI / 2)
 		return (0);
 	v_x = get_first_step(data, 'V');
 	v_y = (v_x - data->player.p_x) * tan(data->ray.r_angle) + data->player.p_y;
@@ -90,7 +103,7 @@ void	get_shorter_distance(t_data *data)
 
 void	raycasting(t_data *data)
 {
-	int		ray;
+	int	ray;
 
 	ray = 0;
 	data->ray.r_angle = data->player.p_angle - (data->player.fov_rad / 2);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gdaignea <gdaignea@student.42.fr>          +#+  +:+       +#+         #
+#    By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/31 10:58:48 by maax              #+#    #+#              #
-#    Updated: 2024/07/22 15:44:18 by gdaignea         ###   ########.fr        #
+#    Updated: 2024/07/23 14:30:24 by malauzie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,12 +26,10 @@ HDR_DIR	=		inc
 OBJ_DIR = 		obj
 LIBFT_DIR =		libft
 FT_PRINTF_DIR =	ft_printf
-#GNL_DIR =		get_next_line
 
 #----------------- SOURCE FILES ------------------#
 SRC_FLS =	$(LIBFT_FLS)\
 			$(FT_PRINTF_FLS)\
-			#$(GNL_FLS)\
 
 LIBFT_FLS = $(LIBFT_DIR)/ft_atoi.c\
 			$(LIBFT_DIR)/ft_bzero.c\
@@ -81,8 +79,6 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_atoi.c\
 FT_PRINTF_FLS =	$(FT_PRINTF_DIR)/ft_printf.c\
 				$(FT_PRINTF_DIR)/utils.c\
 
-#GNL_FLS =	$(GNL_DIR)/get_next_line.c\
-
 #------------------ FILES PATH -------------------#
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
 OBJS	=		$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, $(SRCS))
@@ -99,7 +95,6 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/$(LIBFT_DIR)
 	mkdir -p $(OBJ_DIR)/$(FT_PRINTF_DIR)
-#mkdir -p $(OBJ_DIR)/$(GNL_DIR)
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)

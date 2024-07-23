@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 14:31:39 by malauzie          #+#    #+#             */
+/*   Updated: 2024/07/23 15:24:58 by malauzie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 // 0 = NO ; 1 = SO ; 2 = WE ; 3 = EA
@@ -79,8 +91,8 @@ void	draw_floor_ceiling(t_data *data, int ray, int bottom_pix, int top_pix)
 
 void	display_wall(t_data *data, int ray)
 {
-	int		bottom_pix;
-	int		top_pix;
+	double		bottom_pix;
+	double		top_pix;
 
 	data->ray.r_distance *= cos(normalize_angle(data->ray.r_angle
 				- data->player.p_angle));

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 14:32:28 by malauzie          #+#    #+#             */
+/*   Updated: 2024/07/23 15:30:39 by malauzie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 void	rotate(t_data *data, int direction)
@@ -42,9 +54,9 @@ void	move_left_right(t_data *data, int dir)
 	int	new_y;
 
 	new_x = data->player.p_x + floorf(data->player.p_speed
-			* cos(data->player.p_angle + dir * P2));
+			* cos(data->player.p_angle + dir * (PI / 2)));
 	new_y = data->player.p_y + floorf(data->player.p_speed
-			* sin(data->player.p_angle + dir * P2));
+			* sin(data->player.p_angle + dir * (PI / 2)));
 	if (data->map[new_y / TILE_SIZE][new_x / TILE_SIZE] != '1')
 	{
 		data->player.p_x = new_x;

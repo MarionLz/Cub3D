@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 14:29:25 by malauzie          #+#    #+#             */
+/*   Updated: 2024/07/23 14:37:41 by malauzie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 // 0 = NO ; 1 = SO; 2 = WE ; 3 = EA
@@ -49,7 +61,7 @@ void	convert_color(t_data *data, char **colors, char *line, int flag)
 	check_counts(data, line);
 }
 
-void	parse_floor_and_ceiling(char *line, t_data *data)
+void	parse_floor_ceiling(char *line, t_data *data)
 {
 	char	**colors;
 	int		i;
@@ -76,7 +88,7 @@ int	parse_blocs(char *line, t_data *data, int file_blocs)
 	}
 	else if (ft_strncmp(line, "F", 1) == 0 || ft_strncmp(line, "C", 1) == 0)
 	{
-		parse_floor_and_ceiling(line, data);
+		parse_floor_ceiling(line, data);
 		file_blocs++;
 	}
 	else if (is_map(line) == 1)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 14:32:36 by malauzie          #+#    #+#             */
+/*   Updated: 2024/07/23 14:54:20 by malauzie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 bool	empty_line(char *line)
@@ -29,20 +41,6 @@ bool	closed_map(t_data *data, int x, int y)
 	if (data->map[y - 1][x + 1] == ' ' || data->map[y + 1][x + 1] == ' ')
 		return (false);
 	return (true);
-}
-
-int	is_map(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '\n')
-		return (0);
-	while (str[i] == ' ')
-		i++;
-	if (ft_strchr("01NSEW", str[i]))
-		return (1);
-	return (0);
 }
 
 void	check_map(t_data *data)

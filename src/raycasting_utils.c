@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 14:32:52 by malauzie          #+#    #+#             */
+/*   Updated: 2024/07/23 15:30:05 by malauzie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 double	normalize_angle(double angle)
@@ -20,9 +32,9 @@ double	get_first_step(t_data *data, char dir)
 	}
 	if (dir == 'V')
 	{
-		if (data->ray.r_angle > P2 && data->ray.r_angle < P3)
+		if (data->ray.r_angle > PI / 2 && data->ray.r_angle < 3 * PI / 2)
 			return ((data->player.p_x / TILE_SIZE) * TILE_SIZE);
-		if (data->ray.r_angle < P2 || data->ray.r_angle > P3)
+		if (data->ray.r_angle < PI / 2 || data->ray.r_angle > 3 * PI / 2)
 			return ((data->player.p_x / TILE_SIZE) * TILE_SIZE + TILE_SIZE);
 	}
 	return (0);
@@ -39,9 +51,9 @@ double	get_inter(t_data *data, char dir)
 	}
 	if (dir == 'V')
 	{
-		if (data->ray.r_angle > P2 && data->ray.r_angle < P3)
+		if (data->ray.r_angle > PI / 2 && data->ray.r_angle < 3 * PI / 2)
 			return (-TILE_SIZE);
-		if (data->ray.r_angle < P2 || data->ray.r_angle > P3)
+		if (data->ray.r_angle < PI / 2 || data->ray.r_angle > 3 * PI / 2)
 			return (TILE_SIZE);
 	}
 	return (0);
