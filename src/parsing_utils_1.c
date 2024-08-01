@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maax <maax@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:32:41 by malauzie          #+#    #+#             */
-/*   Updated: 2024/07/23 14:32:42 by malauzie         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:37:01 by maax             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	load_path(t_data *data, char *line, int i, int *dir)
 void	init_p_angle(t_data *data, char dir)
 {
 	if (dir == 'N')
-		data->player.p_angle = P3;
+		data->player.p_angle = 3 * PI / 2;
 	if (dir == 'S')
-		data->player.p_angle = P2;
+		data->player.p_angle = PI / 2;
 	if (dir == 'E')
 		data->player.p_angle = 0;
 	if (dir == 'W')

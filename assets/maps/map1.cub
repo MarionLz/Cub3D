@@ -1,10 +1,10 @@
-NO ./assets/textures/fox.xpm 
-SO ./assets/textures/owl.xpm
-WE ./assets/textures/wolf.xpm
-EA ./assets/textures/squirrel.xpm
+NO ./assets/textures/peinture.xpm 
+SO ./assets/textures/carreaux.xpm
+WE ./assets/textures/herbe.xpm
+EA ./assets/textures/parquet.xpm
 
-F 192,192,192
-C 129,129,129
+F 135,206,235
+C 125,252,0
 
 111111111111111111
 100100001000000001

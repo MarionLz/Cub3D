@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maax <maax@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 14:29:25 by malauzie          #+#    #+#             */
-/*   Updated: 2024/07/23 14:37:41 by malauzie         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:17:28 by maax             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	parse_floor_ceiling(char *line, t_data *data)
 		i++;
 	colors = ft_split(&line[i], ',');
 	check_floor_ceiling_format(colors, data, line);
-	if (ft_strncmp(line, "F", 1) == 0)
+	if (ft_strncmp(line, "C", 1) == 0)
 		convert_color(data, colors, line, 0);
-	else if (ft_strncmp(line, "C", 1) == 0)
+	else if (ft_strncmp(line, "F", 1) == 0)
 		convert_color(data, colors, line, 1);
 	free_tab(colors);
 }

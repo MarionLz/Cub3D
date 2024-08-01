@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malauzie <malauzie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maax <maax@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:58:43 by malauzie          #+#    #+#             */
-/*   Updated: 2024/07/23 15:32:04 by malauzie         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:37:34 by maax             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@
 # define BACK			115
 # define RIGHT			100
 //azerty :
-//# define FORWARD		122
-//# define LEFT			113
+# define FORWARD		122
+# define LEFT			113
 //qwerty :
-# define FORWARD		119
-# define LEFT			97
+//# define FORWARD		119
+//# define LEFT			97
 
 typedef struct s_img
 {
